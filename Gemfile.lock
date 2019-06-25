@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lite-uxid (1.0.0)
+    lite-uxid (1.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -115,7 +115,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
-  activesupport
   bundler
   database_cleaner
   fasterer
