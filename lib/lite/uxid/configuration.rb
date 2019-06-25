@@ -2,6 +2,7 @@
 
 module Lite
   module Uxid
+
     class Configuration
 
       attr_accessor :encoding_chars, :encoding_length, :encoding_salt

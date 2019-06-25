@@ -3,11 +3,11 @@
 require 'spec_helper'
 
 RSpec.describe Lite::Uxid::Ulid do
-  let(:encoder) { Lite::Uxid::Ulid.new }
+  let(:encoder) { described_class.new }
 
   describe '.encode' do
     it 'to be 26' do
-      expect(Lite::Uxid::Ulid.encode.length).to eq(26)
+      expect(described_class.encode.length).to eq(26)
     end
   end
 
@@ -25,13 +25,13 @@ RSpec.describe Lite::Uxid::Ulid do
 
   describe '.uxid_octect' do
     it 'to be a random string' do
-      expect(encoder.uxid_octect).to_not eq(nil)
+      expect(encoder.uxid_octect).not_to eq(nil)
     end
   end
 
   describe '.uxid_unixtime_flex' do
     it 'to be a random integer' do
-      expect(encoder.uxid_unixtime_flex).to_not eq(nil)
+      expect(encoder.uxid_unixtime_flex).not_to eq(nil)
     end
   end
 

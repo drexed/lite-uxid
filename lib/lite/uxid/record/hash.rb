@@ -7,6 +7,7 @@ module Lite
   module Uxid
     module Record
       module Hash
+
         extend ActiveSupport::Concern
 
         included do

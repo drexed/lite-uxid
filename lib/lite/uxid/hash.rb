@@ -10,10 +10,12 @@ module Lite
       end
 
       class << self
+
         def encode(id)
           klass = new(id)
           klass.encode_uxid
         end
+
       end
 
       def self.decode(id)

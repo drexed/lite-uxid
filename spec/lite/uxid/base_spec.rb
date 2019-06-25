@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Lite::Uxid::Base do
-  let(:base) { Lite::Uxid::Base.new }
+  let(:base) { described_class.new }
 
   describe '.encoding_base' do
     it 'to be 62' do
@@ -26,8 +26,8 @@ RSpec.describe Lite::Uxid::Base do
   end
 
   describe '.encoding_salt' do
-    it 'to be 1369136' do
-      expect(base.encoding_salt).to eq(1369136)
+    it 'to be 1_369_136' do
+      expect(base.encoding_salt).to eq(1_369_136)
     end
   end
 

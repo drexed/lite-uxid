@@ -7,10 +7,12 @@ module Lite
     class Ulid < Lite::Uxid::Base
 
       class << self
+
         def encode
           klass = new
           klass.uxid_encode
         end
+
       end
 
       def uxid_encode

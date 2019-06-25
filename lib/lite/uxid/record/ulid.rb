@@ -7,6 +7,7 @@ module Lite
   module Uxid
     module Record
       module Ulid
+
         extend ActiveSupport::Concern
 
         included do

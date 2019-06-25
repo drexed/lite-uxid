@@ -5,7 +5,7 @@ require 'spec_helper'
 class HashUser < User; end
 
 RSpec.describe Lite::Uxid::Record::Hash do
-  let(:klass) { HashUser.include(Lite::Uxid::Record::Hash) }
+  let(:klass) { HashUser.include(described_class) }
   let(:user) { klass.create! }
 
   describe '.find_by_uxid(!)' do

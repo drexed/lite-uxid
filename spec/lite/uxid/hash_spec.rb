@@ -3,18 +3,18 @@
 require 'spec_helper'
 
 RSpec.describe Lite::Uxid::Hash do
-  let(:encoder) { Lite::Uxid::Hash.new(10) }
-  let(:decoder) { Lite::Uxid::Hash.new('q5D8inm0') }
+  let(:encoder) { described_class.new(10) }
+  let(:decoder) { described_class.new('q5D8inm0') }
 
   describe '.encode' do
     it 'to be "q5D8inm0"' do
-      expect(Lite::Uxid::Hash.encode(10)).to eq('q5D8inm0')
+      expect(described_class.encode(10)).to eq('q5D8inm0')
     end
   end
 
   describe '.decode' do
     it 'to be 10' do
-      expect(Lite::Uxid::Hash.decode('q5D8inm0')).to eq(10)
+      expect(described_class.decode('q5D8inm0')).to eq(10)
     end
   end
 
