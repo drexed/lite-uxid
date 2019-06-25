@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Lite::Uxid::InstallGenerator, type: :generator do
   destination(File.expand_path('../../tmp', __FILE__))
 
-  before(:all) do
+  before do
     prepare_destination
     run_generator
   end

@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Lite::Uxid::Configuration do
-  after(:all) do
+  after do
     Lite::Uxid.configure do |config|
       config.encoding_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
       config.encoding_length = 26
