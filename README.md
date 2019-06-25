@@ -1,8 +1,9 @@
 # Lite::Uxid
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/lite/uxid`. To experiment with that code, run `bin/console` for an interactive prompt.
+Lite::Uxid is a library for generating or obfuscating Id's based on Hash and ULID algorithms.
+It's very useful to hide the number of resources in your database and protect against enumeration attacks.
 
-TODO: Delete this and the text above, and describe your gem
+**NOTE:** If you are coming from `ActiveUxid`, please read the [port](#port) section.
 
 ## Installation
 
@@ -20,9 +21,87 @@ Or install it yourself as:
 
     $ gem install lite-uxid
 
-## Usage
+## Table of Contents
 
-TODO: Write usage instructions here
+* [Configuration](#configuration)
+* [Hash](#hash)
+* [ULID](#ulid)
+* [ActiveRecord](#active_record)
+* [Port](#port)
+
+## Configuration
+
+`rails g lite:uxid:install` will generate the following file:
+`../config/initalizers/lite-uxid.rb`
+
+```ruby
+Lite::Uxid.configure do |config|
+  config.encoding_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  config.encoding_length = 26
+  config.encoding_salt = 1_369_136
+end
+```
+
+## Hash
+
+Hash ID's are reversible but less performant than ULID.
+
+```ruby
+Lite::Uxid::Hash.encode(10)         #=> 'q5D8inm0'
+Lite::Uxid::Hash.decode('q5D8inm0') #=> 10
+```
+
+## ULID
+
+ULID are not reversible and more performant than Hash Id's.
+
+```ruby
+Lite::Uxid::Ulid.encode #=> '1mqfg9qa96s8s5f02o1ucf8lcc'
+```
+
+## ActiveRecord
+
+**Table**
+
+Add the following attribute to all corresponding tables.
+
+```ruby
+# omitted
+  t.binary :uxid, null: false, limit: 16, index: { unique: true }
+# omitted
+```
+
+**Setup**
+
+All `uxid` attributes will be automatically generated and applied when the record is created.
+
+```ruby
+class User < ActiveRecord::Base
+  include Lite::Uxid::Record::Hash
+
+  # Or
+
+  include Lite::Uxid::Record::Ulid
+end
+```
+
+**Usage**
+
+The following methods are for Hash based Uxid's.
+
+```ruby
+User.find_by_uxid('x123') #=> Find record by uxid
+
+user = User.new
+user.uxid_to_id           #=> Decodes the records uxid to id (only for Hash based Id's)
+```
+
+## Port
+
+`Lite::Uxid` is compatible port of [ActiveUxid](https://github.com/drexed/active_uxid).
+
+Switching is as easy as renaming `ActiveUxid::Hash` to `Lite::Uxid::Hash`
+and `ActiveUxid::Ulid` to `Lite::Uxid::Ulid`.
 
 ## Development
 

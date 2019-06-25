@@ -1,4 +1,6 @@
-require "lite/uxid/version"
+# frozen_string_literal: true
+
+require 'lite/uxid/version'
 
 module Lite
   module Uxid
