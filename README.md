@@ -67,7 +67,7 @@ Add the following attribute to all corresponding tables.
 
 ```ruby
 # omitted
-  t.binary :uxid, null: false, limit: 16, index: { unique: true }
+  t.binary :uxid, limit: 16, index: { unique: true }
 # omitted
 ```
 
@@ -90,10 +90,11 @@ end
 The following methods are for Hash based Uxid's.
 
 ```ruby
-User.find_by_uxid('x123') #=> Find record by uxid
+User.find_by_uxid('x123')   #=> Find record by uxid
+User.find_by_uxid!('x123')  #=> Raises an ActiveRecord::RecordNotFound error if not found
 
 user = User.new
-user.uxid_to_id           #=> Decodes the records uxid to id (only for Hash based Id's)
+user.uxid_to_id             #=> Decodes the records uxid to id (only for Hash based Id's)
 ```
 
 ## Port
