@@ -9,4 +9,4 @@ end
   require "lite/uxid/#{name}"
 end
 
-# require 'generators/active_uxid/install_generator'
+require 'generators/lite/uxid/install_generator'

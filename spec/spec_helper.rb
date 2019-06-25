@@ -2,13 +2,14 @@
 
 require 'bundler/setup'
 require 'lite/uxid'
+require 'active_record'
+require 'database_cleaner'
+require 'generator_spec'
+require 'pathname'
 
-%w[active_record database_cleaner generator_spec pathname].each do |name|
-  require name
-end
-
-spec_support_path = Pathname.new(File.expand_path('../spec/support', File.dirname(__FILE__)))
-spec_tmp_path = Pathname.new(File.expand_path('../spec/generators/tmp', File.dirname(__FILE__)))
+spec_file_dir = File.dirname(__FILE__)
+spec_support_path = Pathname.new(File.expand_path('../spec/support', spec_file_dir))
+spec_tmp_path = Pathname.new(File.expand_path('../spec/generators/lite/tmp', spec_file_dir))
 
 ActiveRecord::Base.configurations = YAML.load_file(spec_support_path.join('config/database.yml'))
 ActiveRecord::Base.establish_connection(:test)
