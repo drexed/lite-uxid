@@ -38,7 +38,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w[lib]
 
   spec.add_development_dependency 'activerecord'
-  spec.add_development_dependency 'activesupport'
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'database_cleaner'
   spec.add_development_dependency 'fasterer'

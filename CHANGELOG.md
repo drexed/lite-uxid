@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2019-06-25
+### Added
+- Remove unused activesupport dependency
+
 ## [1.0.0] - 2019-06-25
 ### Added
 - Initial project version
