@@ -1,5 +1,8 @@
 # Lite::Uxid
 
+[![Gem Version](https://badge.fury.io/rb/lite-uxid.svg)](http://badge.fury.io/rb/lite-uxid)
+[![Build Status](https://travis-ci.org/drexed/lite-uxid.svg?branch=master)](https://travis-ci.org/drexed/lite-uxid)
+
 Lite::Uxid is a library for generating or obfuscating Id's based on Hash and ULID algorithms.
 It's very useful to hide the number of resources in your database and protect against enumeration attacks.
 
