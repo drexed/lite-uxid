@@ -7,20 +7,13 @@ require 'database_cleaner'
 require 'generator_spec'
 require 'pathname'
 
-spec_file_path = File.dirname(__FILE__)
-spec_sprt_path = Pathname.new(File.expand_path('../spec/support', spec_file_path))
-spec_temp_path = Pathname.new(File.expand_path('../spec/generators/lite/tmp', spec_file_path))
+spec_path = Pathname.new(File.expand_path('../spec', File.dirname(__FILE__)))
 
-ActiveRecord::Base.configurations = YAML.load_file(spec_sprt_path.join('config/database.yml'))
-ActiveRecord::Base.establish_connection(:test)
-ActiveRecord::Base.time_zone_aware_attributes = true
-ActiveRecord::Migration.verbose = false
-
-load(spec_sprt_path.join('db/schema.rb'))
-
-Dir.glob(spec_sprt_path.join('models/*.rb'))
-   .each { |f| autoload(File.basename(f).chomp('.rb').camelcase.intern, f) }
-   .each { |f| require(f) }
+%w[config models].each do |dir|
+  Dir.each_child(spec_path.join("support/#{dir}")) do |f|
+    load(spec_path.join("support/#{dir}/#{f}"))
+  end
+end
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -41,5 +34,8 @@ RSpec.configure do |config|
   config.before { DatabaseCleaner.start }
   config.after { DatabaseCleaner.clean }
 
-  config.after(:all) { FileUtils.remove_dir(spec_temp_path) if File.directory?(spec_temp_path) }
+  config.after(:all) do
+    temp_path = spec_path.join('generators/lite/tmp')
+    FileUtils.remove_dir(temp_path) if File.directory?(temp_path)
+  end
 end
