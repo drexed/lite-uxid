@@ -7,16 +7,18 @@ require 'database_cleaner'
 require 'generator_spec'
 require 'pathname'
 
-spec_file_dir = File.dirname(__FILE__)
-spec_support_path = Pathname.new(File.expand_path('../spec/support', spec_file_dir))
-spec_tmp_path = Pathname.new(File.expand_path('../spec/generators/lite/tmp', spec_file_dir))
+spec_file_path = File.dirname(__FILE__)
+spec_sprt_path = Pathname.new(File.expand_path('../spec/support', spec_file_path))
+spec_temp_path = Pathname.new(File.expand_path('../spec/generators/lite/tmp', spec_file_path))
 
-ActiveRecord::Base.configurations = YAML.load_file(spec_support_path.join('config/database.yml'))
+ActiveRecord::Base.configurations = YAML.load_file(spec_sprt_path.join('config/database.yml'))
 ActiveRecord::Base.establish_connection(:test)
+ActiveRecord::Base.time_zone_aware_attributes = true
+ActiveRecord::Migration.verbose = false
 
-load(spec_support_path.join('db/schema.rb'))
+load(spec_sprt_path.join('db/schema.rb'))
 
-Dir.glob(spec_support_path.join('models/*.rb'))
+Dir.glob(spec_sprt_path.join('models/*.rb'))
    .each { |f| autoload(File.basename(f).chomp('.rb').camelcase.intern, f) }
    .each { |f| require(f) }
 
@@ -39,5 +41,5 @@ RSpec.configure do |config|
   config.before { DatabaseCleaner.start }
   config.after { DatabaseCleaner.clean }
 
-  config.after(:all) { FileUtils.remove_dir(spec_tmp_path) if File.directory?(spec_tmp_path) }
+  config.after(:all) { FileUtils.remove_dir(spec_temp_path) if File.directory?(spec_temp_path) }
 end
