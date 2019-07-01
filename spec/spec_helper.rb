@@ -3,7 +3,6 @@
 require 'bundler/setup'
 require 'lite/uxid'
 require 'generator_spec'
-require 'pathname'
 
 spec_path = Pathname.new(File.expand_path('../spec', File.dirname(__FILE__)))
 
