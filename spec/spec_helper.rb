@@ -2,8 +2,6 @@
 
 require 'bundler/setup'
 require 'lite/uxid'
-require 'active_record'
-require 'database_cleaner'
 require 'generator_spec'
 require 'pathname'
 
