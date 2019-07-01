@@ -26,14 +26,6 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.before { DatabaseCleaner.start }
-  config.after { DatabaseCleaner.clean }
-
   config.after(:all) do
     temp_path = spec_path.join('generators/lite/tmp')
     FileUtils.remove_dir(temp_path) if File.directory?(temp_path)
