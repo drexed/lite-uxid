@@ -102,7 +102,7 @@ user.uxid_to_id             #=> Decodes the records uxid to id (only for Hash ba
 
 ## Port
 
-`Lite::Uxid` is compatible port of [ActiveUxid](https://github.com/drexed/active_uxid).
+`Lite::Uxid` is a compatible port of [ActiveUxid](https://github.com/drexed/active_uxid).
 
 Switching is as easy as renaming `ActiveUxid` to `Lite::Uxid`.
 
