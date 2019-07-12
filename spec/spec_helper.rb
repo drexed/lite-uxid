@@ -4,6 +4,12 @@ require 'bundler/setup'
 require 'lite/uxid'
 require 'generator_spec'
 
+Lite::Uxid.configure do |config|
+  config.encoding_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  config.encoding_length = 26
+  config.encoding_salt = 1_369_136
+end
+
 spec_path = Pathname.new(File.expand_path('../spec', File.dirname(__FILE__)))
 
 %w[config models].each do |dir|
@@ -27,10 +33,4 @@ RSpec.configure do |config|
     temp_path = spec_path.join('generators/lite/tmp')
     FileUtils.remove_dir(temp_path) if File.directory?(temp_path)
   end
-end
-
-Lite::Uxid.configure do |config|
-  config.encoding_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  config.encoding_length = 26
-  config.encoding_salt = 1_369_136
 end
