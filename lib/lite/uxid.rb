@@ -4,7 +4,7 @@
   require "lite/uxid/#{name}"
 end
 
-%w[hash ulid].each do |name|
+%w[hash nanoid ulid].each do |name|
   require "lite/uxid/record/#{name}"
   require "lite/uxid/#{name}"
 end

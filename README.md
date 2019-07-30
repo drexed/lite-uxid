@@ -28,6 +28,7 @@ Or install it yourself as:
 
 * [Configuration](#configuration)
 * [Hash](#hash)
+* [NanoID](#nanoid)
 * [ULID](#ulid)
 * [ActiveRecord](#active_record)
 * [Port](#port)
@@ -54,15 +55,23 @@ Lite::Uxid::Hash.encode(10)         #=> 'q5D8inm0'
 Lite::Uxid::Hash.decode('q5D8inm0') #=> 10
 ```
 
+## NanoID
+
+NanoID are not reversible and are the most performant random ID's but while unlikely can produce collisions.
+
+```ruby
+Lite::Uxid::Nanoid.encode #=> '0bmHjB5Gx8FTBqJekX6dS6XIXf'
+```
+
 ## ULID
 
-ULID are not reversible and more performant than Hash Id's.
+ULID are not reversible and more performant than Hash ID's.
 
 ```ruby
 Lite::Uxid::Ulid.encode #=> '1mqfg9qa96s8s5f02o1ucf8lcc'
 ```
 
-## ActiveRecord
+#### ActiveRecord
 
 **Table**
 
@@ -70,19 +79,23 @@ Add the following attribute to all corresponding tables.
 
 ```ruby
 # omitted
-  t.binary :uxid, limit: 16, index: { unique: true }
+  t.binary :uxid, limit: 26, index: { unique: true }
 # omitted
 ```
 
 **Setup**
 
-All `uxid` attributes will be automatically generated and applied when the record is created.
+All `nanoid` and `uxid` attributes will be automatically generated and applied when the record is created.
 
 ```ruby
 class User < ActiveRecord::Base
   include Lite::Uxid::Record::Hash
 
-  # Or
+  # - or -
+
+  include Lite::Uxid::Record::Nanoid
+
+  # - or -
 
   include Lite::Uxid::Record::Ulid
 end
@@ -93,11 +106,11 @@ end
 The following methods are for Hash based Uxid's.
 
 ```ruby
-User.find_by_uxid('x123')   #=> Find record by uxid
-User.find_by_uxid!('x123')  #=> Raises an ActiveRecord::RecordNotFound error if not found
+User.find_by_ulid('x123')   #=> Find record by uxid
+User.find_by_ulid!('x123')  #=> Raises an ActiveRecord::RecordNotFound error if not found
 
 user = User.new
-user.uxid_to_id             #=> Decodes the records uxid to id (only for Hash based Id's)
+user.hash_to_id             #=> Decodes the records uxid to id (only for Hash based Id's)
 ```
 
 ## Port
