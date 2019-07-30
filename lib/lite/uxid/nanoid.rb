@@ -16,8 +16,8 @@ module Lite
       end
 
       def nanoid_encode
-        encoding_length.times.with_object(''.dup) do |i, str|
-          str << encoding_chars[(SecureRandom.rand * encoding_base).floor]
+        encoding_length.times.with_object('') do |_i, str|
+          str + encoding_chars[(SecureRandom.rand * encoding_base).floor]
         end
       end
 
