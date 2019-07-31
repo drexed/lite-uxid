@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added benchmarks
 ### Changed
+- Changed instance method names to match class names
 - Changed nanoid encoder to be faster
 - Changed ulid encoder to be faster
 

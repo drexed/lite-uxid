@@ -8,20 +8,23 @@ module Lite
 
         def encode
           klass = new
-          klass.nanoid_encode
+          klass.encode
         end
 
       end
 
-      # rubocop:disable Performance/UnfreezeString
-      def nanoid_encode
-        chars = encoding_chars.split('')
+      def encode
+        str = ''
+        len = encoding_length
+        chars = encoding_chars.split(str)
 
-        encoding_length.times.reduce(''.dup) do |str, _|
-          str << chars.sample
+        while len.positive?
+          str += chars.sample
+          len -= 1
         end
+
+        str
       end
-      # rubocop:enable Performance/UnfreezeString
 
     end
   end

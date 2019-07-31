@@ -7,13 +7,10 @@ RSpec.describe Lite::Uxid::Nanoid do
 
   describe '.encode' do
     it 'to be 26' do
-      expect(described_class.encode.length).to eq(26)
-    end
-  end
+      n1 = 26
 
-  describe '.nanoid_encode' do
-    it 'to be 26' do
-      expect(encoder.nanoid_encode.length).to eq(26)
+      expect(described_class.encode.length).to eq(n1)
+      expect(encoder.encode.length).to eq(n1)
     end
   end
 

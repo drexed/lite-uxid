@@ -12,13 +12,15 @@ module Lite
 
         included do
           after_create :callback_generate_uxid!, if: proc { respond_to?(:uxid) }
+        end
 
-          def self.find_by_uxid(uxid)
+        class_methods do
+          def find_by_uxid(uxid)
             decoded_id = Lite::Uxid::Hash.decode(uxid)
             find_by(id: decoded_id)
           end
 
-          def self.find_by_uxid!(uxid)
+          def find_by_uxid!(uxid)
             record = find_by_uxid(uxid)
             return record unless record.nil?
 
