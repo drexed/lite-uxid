@@ -31,6 +31,7 @@ Or install it yourself as:
 * [NanoID](#nanoid)
 * [ULID](#ulid)
 * [ActiveRecord](#active_record)
+* [Benchmarks](#benchmarks)
 * [Port](#port)
 
 ## Configuration
@@ -48,7 +49,7 @@ end
 
 ## Hash
 
-Hash ID's are reversible but less performant than ULID.
+Hash ID's are reversible and is the most performant generator.
 
 ```ruby
 Lite::Uxid::Hash.encode(10)         #=> 'q5D8inm0'
@@ -57,7 +58,7 @@ Lite::Uxid::Hash.decode('q5D8inm0') #=> 10
 
 ## NanoID
 
-NanoID are not reversible and are the most performant random ID's but while unlikely can produce collisions.
+NanoID are not reversible and are the second fastest ID generator but while unlikely can produce collisions.
 
 ```ruby
 Lite::Uxid::Nanoid.encode #=> '0bmHjB5Gx8FTBqJekX6dS6XIXf'
@@ -65,7 +66,7 @@ Lite::Uxid::Nanoid.encode #=> '0bmHjB5Gx8FTBqJekX6dS6XIXf'
 
 ## ULID
 
-ULID are not reversible and more performant than Hash ID's.
+ULID are not reversible but provide information outside of just randomness.
 
 ```ruby
 Lite::Uxid::Ulid.encode #=> '1mqfg9qa96s8s5f02o1ucf8lcc'
@@ -112,6 +113,12 @@ User.find_by_ulid!('x123')  #=> Raises an ActiveRecord::RecordNotFound error if 
 user = User.new
 user.hash_to_id             #=> Decodes the records uxid to id (only for Hash based Id's)
 ```
+
+## Benchmarks
+
+The classes ranked from fastest to slowest are `Hash`, `Nanoid`, and `Ulid`.
+
+View how each compares by running the [benchmarks](https://github.com/drexed/lite-uxid/tree/master/benchmarks).
 
 ## Port
 

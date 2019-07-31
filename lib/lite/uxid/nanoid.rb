@@ -15,11 +15,15 @@ module Lite
 
       end
 
+      # rubocop:disable Performance/UnfreezeString
       def nanoid_encode
-        encoding_length.times.with_object('') do |_i, str|
-          str + encoding_chars[(SecureRandom.rand * encoding_base).floor]
+        chars = encoding_chars.split('')
+
+        encoding_length.times.reduce(''.dup) do |str, _|
+          str << chars.sample
         end
       end
+      # rubocop:enable Performance/UnfreezeString
 
     end
   end
