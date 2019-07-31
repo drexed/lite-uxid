@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added benchmarks
 ### Changed
 - Changed nanoid encoder to be faster
+- Changed ulid encoder to be faster
 
 ## [1.0.2] - 2019-07-30
 ### Added

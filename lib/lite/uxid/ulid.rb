@@ -6,6 +6,8 @@ module Lite
   module Uxid
     class Ulid < Lite::Uxid::Base
 
+      MASK ||= 0x1f
+
       class << self
 
         def encode
@@ -16,11 +18,20 @@ module Lite
       end
 
       def uxid_encode
-        (1..encoding_length).reduce('') do |str, num|
-          shift = 128 - 5 * num
-          "#{str}#{encoding_chars[(uxid_octect >> shift) & 0x1f]}"
+        oct = uxid_octect
+        ele = '0' * encoding_length
+        pos = encoding_length - 1
+
+        while oct.positive?
+          ele[pos] = encoding_chars[oct & MASK]
+          oct >>= 5
+          pos -= 1
         end
+
+        ele
       end
+
+      private
 
       def uxid_bytes
         "#{uxid_unixtime_48bit}#{SecureRandom.random_bytes(10)}"
@@ -33,7 +44,7 @@ module Lite
 
       def uxid_unixtime_flex
         time = Time.respond_to?(:current) ? Time.current : Time.now
-        (time.to_f * 10_000).to_i
+        (time.to_f * 1_000).to_i
       end
 
       def uxid_unixtime_48bit

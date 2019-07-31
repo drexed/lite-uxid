@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'securerandom'
-
 module Lite
   module Uxid
     class Nanoid < Lite::Uxid::Base

@@ -16,11 +16,11 @@ module Lite
           klass.encode_uxid
         end
 
-      end
+        def decode(id)
+          klass = new(id)
+          klass.decode_uxid
+        end
 
-      def self.decode(id)
-        klass = new(id)
-        klass.decode_uxid
       end
 
       def encode_uxid
@@ -30,6 +30,8 @@ module Lite
       def decode_uxid
         (uxid_decode_chars(@id) >> encoding_length) - encoding_salt
       end
+
+      private
 
       def uxid_encode_chars(id)
         return '0' if id.zero?
