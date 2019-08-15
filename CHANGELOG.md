@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4] - 2019-08-15
+### Changed
+- Underscore initializer file name
+
 ## [1.0.3] - 2019-07-31
 ### Added
 - Added benchmarks

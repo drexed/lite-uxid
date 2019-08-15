@@ -37,7 +37,7 @@ Or install it yourself as:
 ## Configuration
 
 `rails g lite:uxid:install` will generate the following file:
-`../config/initalizers/lite-uxid.rb`
+`../config/initalizers/lite_uxid.rb`
 
 ```ruby
 Lite::Uxid.configure do |config|
