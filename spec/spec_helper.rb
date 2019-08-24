@@ -4,11 +4,7 @@ require 'bundler/setup'
 require 'lite/uxid'
 require 'generator_spec'
 
-Lite::Uxid.configure do |config|
-  config.encoding_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  config.encoding_length = 26
-  config.encoding_salt = 1_369_136
-end
+Lite::Uxid.reset_configuration!
 
 spec_path = Pathname.new(File.expand_path('../spec', File.dirname(__FILE__)))
 
