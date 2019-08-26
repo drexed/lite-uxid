@@ -29,7 +29,14 @@ module Lite
         private
 
         def callback_generate_uxid!
-          self.uxid = Lite::Uxid::Nanoid.encode
+          random_nanoid = nil
+
+          loop do
+            random_nanoid = Lite::Uxid::Nanoid.encode
+            break unless self.class.exists?(uxid: random_nanoid)
+          end
+
+          self.uxid = random_nanoid
         end
 
       end
