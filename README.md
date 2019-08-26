@@ -80,7 +80,7 @@ Add the following attribute to all corresponding tables.
 
 ```ruby
 # omitted
-  t.binary :uxid, limit: 26, index: { unique: true }
+  t.binary :uxid, index: { unique: true }
 # omitted
 ```
 
