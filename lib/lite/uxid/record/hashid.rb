@@ -5,7 +5,7 @@ require 'active_support'
 module Lite
   module Uxid
     module Record
-      module Hash
+      module Hashid
 
         extend ActiveSupport::Concern
 
@@ -15,7 +15,7 @@ module Lite
 
         class_methods do
           def find_by_uxid(uxid)
-            decoded_id = Lite::Uxid::Hash.decode(uxid)
+            decoded_id = Lite::Uxid::Hashid.decode(uxid)
             find_by(id: decoded_id)
           end
 
@@ -30,13 +30,13 @@ module Lite
         def uxid_to_id
           return unless respond_to?(:uxid)
 
-          Lite::Uxid::Hash.decode(uxid)
+          Lite::Uxid::Hashid.decode(uxid)
         end
 
         private
 
         def callback_generate_uxid!
-          hash = Lite::Uxid::Hash.encode(id)
+          hash = Lite::Uxid::Hashid.encode(id)
           update_column(:uxid, hash)
         end
 

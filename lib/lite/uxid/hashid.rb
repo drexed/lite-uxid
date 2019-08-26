@@ -2,7 +2,7 @@
 
 module Lite
   module Uxid
-    class Hash < Lite::Uxid::Base
+    class Hashid < Lite::Uxid::Base
 
       def initialize(id)
         @id = id

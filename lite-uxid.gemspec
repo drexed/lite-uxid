@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors = ['Juan Gomez']
   spec.email = %w[j.gomez@drexed.com]
 
-  spec.summary = "Generate or obfuscate Hash or ULID based Id's"
+  spec.summary = "Generate or obfuscate Id's using different patterns"
   spec.homepage = 'http://drexed.github.io/lite-uxid'
   spec.license = 'MIT'
 

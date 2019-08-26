@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Lite::Uxid::Hash do
+RSpec.describe Lite::Uxid::Hashid do
   let(:nid) { 10 }
   let(:hid) { 'q5D8inm0' }
   let(:encoder) { described_class.new(nid) }

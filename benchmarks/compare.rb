@@ -6,8 +6,8 @@ require 'benchmark/ips'
 require 'lite/uxid'
 
 Benchmark.ips do |x|
-  x.report('Hash') do
-    Lite::Uxid::Hash.encode(rand(1..1_000_000))
+  x.report('Hashid') do
+    Lite::Uxid::Hashid.encode(rand(1..1_000_000))
   end
 
   x.report('NanoID') do

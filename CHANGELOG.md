@@ -6,11 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.7] - 2019-08-26
+### Added
+- Added prevention of Nanoid collision when using with active_record
+### Changed
+- Renamed Hash to Hashid
+
 ## [1.0.6] - 2019-08-26
 ### Changed
 - Improved how configuration works
 ### Removed
-- Remove activerecord and activesupport requirements that are already provided by Rails
+- Remove active_record requirement that are already provided by Rails
 
 ## [1.0.5] - 2019-08-24
 ### Changed
@@ -25,16 +31,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added benchmarks
 ### Changed
 - Changed instance method names to match class names
-- Changed nanoid encoder to be faster
-- Changed ulid encoder to be faster
+- Changed Nanoid encoder to be faster
+- Changed Ulid encoder to be faster
 
 ## [1.0.2] - 2019-07-30
 ### Added
-- Added nanoid
+- Added Nanoid
 
 ## [1.0.1] - 2019-06-25
 ### Removed
-- Remove unused activesupport dependency
+- Remove unused active_support dependency
 
 ## [1.0.0] - 2019-06-25
 ### Added

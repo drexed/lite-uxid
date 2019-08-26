@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/lite-uxid.svg)](http://badge.fury.io/rb/lite-uxid)
 [![Build Status](https://travis-ci.org/drexed/lite-uxid.svg?branch=master)](https://travis-ci.org/drexed/lite-uxid)
 
-Lite::Uxid is a library for generating or obfuscating Id's based on Hash and ULID algorithms.
+Lite::Uxid is a library for generating or obfuscating Id's based on different patterns.
 It's very useful to hide the number of resources in your database and protect against enumeration attacks.
 
 **NOTE:** If you are coming from `ActiveUxid`, please read the [port](#port) section.
@@ -27,7 +27,7 @@ Or install it yourself as:
 ## Table of Contents
 
 * [Configuration](#configuration)
-* [Hash](#hash)
+* [Hashid](#hashid)
 * [NanoID](#nanoid)
 * [ULID](#ulid)
 * [ActiveRecord](#active_record)
@@ -47,13 +47,13 @@ Lite::Uxid.configure do |config|
 end
 ```
 
-## Hash
+## Hashid
 
-Hash ID's are reversible and is the most performant generator.
+Hashid's are reversible and is the most performant generator.
 
 ```ruby
-Lite::Uxid::Hash.encode(10)         #=> 'q5D8inm0'
-Lite::Uxid::Hash.decode('q5D8inm0') #=> 10
+Lite::Uxid::Hashid.encode(10)         #=> 'q5D8inm0'
+Lite::Uxid::Hashid.decode('q5D8inm0') #=> 10
 ```
 
 ## NanoID
@@ -90,7 +90,7 @@ All `nanoid` and `uxid` attributes will be automatically generated and applied w
 
 ```ruby
 class User < ActiveRecord::Base
-  include Lite::Uxid::Record::Hash
+  include Lite::Uxid::Record::Hashid
 
   # - or -
 
@@ -104,19 +104,20 @@ end
 
 **Usage**
 
-The following methods are for Hash based Uxid's.
+Using one of the mixins above provides a handy method to find records by uxid.
 
 ```ruby
-User.find_by_ulid('x123')   #=> Find record by uxid
-User.find_by_ulid!('x123')  #=> Raises an ActiveRecord::RecordNotFound error if not found
+User.find_by_uxid('x123')   #=> Find record by uxid
+User.find_by_uxid!('x123')  #=> Raises an ActiveRecord::RecordNotFound error if not found
 
+# The following method is for Hashid based Uxid's.
 user = User.new
-user.hash_to_id             #=> Decodes the records uxid to id (only for Hash based Id's)
+user.uxid_to_id             #=> Decodes the records uxid to id (only for Hashid based Id's)
 ```
 
 ## Benchmarks
 
-The classes ranked from fastest to slowest are `Hash`, `Nanoid`, and `Ulid`.
+The classes ranked from fastest to slowest are `Hashid`, `Nanoid`, and `Ulid`.
 
 View how each compares by running the [benchmarks](https://github.com/drexed/lite-uxid/tree/master/benchmarks).
 
