@@ -14,16 +14,7 @@ module Lite
       end
 
       def encode
-        str = ''
-        len = encoding_length
-        chars = encoding_chars.split(str)
-
-        while len.positive?
-          str += chars.sample
-          len -= 1
-        end
-
-        str
+        encoding_chars.split('').sample(encoding_length).join
       end
 
     end

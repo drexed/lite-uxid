@@ -3,6 +3,7 @@
 require 'bundler/setup'
 require 'lite/uxid'
 require 'generator_spec'
+require 'active_record'
 
 Lite::Uxid.reset_configuration!
 
