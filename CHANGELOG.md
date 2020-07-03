@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.7] - 2019-08-26
 ### Added
+- Added ruby 2.7 support
 - Added prevention of Nanoid collision when using with active_record
 ### Changed
 - Renamed Hash to Hashid
