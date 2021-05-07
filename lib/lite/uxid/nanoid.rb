@@ -14,7 +14,7 @@ module Lite
       end
 
       def encode
-        encoding_chars.split('').sample(encoding_length).join
+        encoding_chars.chars.sample(encoding_length).join
       end
 
     end

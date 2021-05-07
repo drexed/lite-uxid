@@ -6,7 +6,7 @@ module Lite
   module Uxid
     class Ulid < Lite::Uxid::Base
 
-      MASK ||= 0x1f
+      MASK = 0x1f
 
       class << self
 
