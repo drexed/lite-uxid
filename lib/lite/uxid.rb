@@ -2,11 +2,12 @@
 
 require 'generators/lite/uxid/install_generator' if defined?(Rails::Generators)
 
-%w[version configuration base].each do |name|
-  require "lite/uxid/#{name}"
-end
-
-%w[hashid nanoid ulid].each do |name|
-  require "lite/uxid/record/#{name}"
-  require "lite/uxid/#{name}"
-end
+require 'lite/uxid/version'
+require 'lite/uxid/configuration'
+require 'lite/uxid/base'
+require 'lite/uxid/record/hashid'
+require 'lite/uxid/record/nanoid'
+require 'lite/uxid/record/ulid'
+require 'lite/uxid/hashid'
+require 'lite/uxid/nanoid'
+require 'lite/uxid/ulid'
