@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'generators/lite/uxid/install_generator' if defined?(Rails::Generators)
+
 %w[version configuration base].each do |name|
   require "lite/uxid/#{name}"
 end
@@ -8,5 +10,3 @@ end
   require "lite/uxid/record/#{name}"
   require "lite/uxid/#{name}"
 end
-
-require 'generators/lite/uxid/install_generator'
