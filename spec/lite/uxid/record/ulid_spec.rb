@@ -26,6 +26,12 @@ RSpec.describe Lite::Uxid::Record::Ulid do
     it 'to be 26' do
       expect(user.uxid.length).to eq(26)
     end
+
+    it 'to be "fake-id"' do
+      user = User.create!(uxid: 'fake-id')
+
+      expect(user.uxid).to eq('fake-id')
+    end
   end
 
 end
