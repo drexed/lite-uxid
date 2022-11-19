@@ -13,7 +13,7 @@ module Lite
       end
 
       Lite::Uxid.configuration.instance_variables.each do |setting|
-        setting = setting.to_s.tr(':@', '')
+        setting = setting.to_s.tr(":@", "")
         define_method(setting) { @config.send(setting) }
       end
 

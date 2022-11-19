@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe Lite::Uxid::Ulid do
   let(:encoder) { described_class.new }
 
-  describe '.encode' do
-    it 'to be 26' do
+  describe ".encode" do
+    it "to be 26" do
       n1 = 26
 
       expect(described_class.encode.length).to eq(n1)

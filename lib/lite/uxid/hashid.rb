@@ -34,10 +34,10 @@ module Lite
       private
 
       def encode_chars(id)
-        return '0' if id.zero?
+        return "0" if id.zero?
         return nil if id.negative?
 
-        str = ''
+        str = ""
 
         while id.positive?
           str = "#{encoding_chars[id % encoding_base]}#{str}"

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'securerandom' unless defined?(SecureRandom)
+require "securerandom" unless defined?(SecureRandom)
 
 module Lite
   module Uxid
@@ -19,7 +19,7 @@ module Lite
 
       def encode
         oct = octect
-        ele = '0' * encoding_length
+        ele = "0" * encoding_length
         pos = encoding_length - 1
 
         while oct.positive?
@@ -38,7 +38,7 @@ module Lite
       end
 
       def octect
-        (hi, lo) = bytes.unpack('Q>Q>')
+        (hi, lo) = bytes.unpack("Q>Q>")
         (hi << 64) | lo
       end
 
@@ -48,7 +48,7 @@ module Lite
       end
 
       def unixtime_48bit
-        [unixtime_ms].pack('Q>')[2..-1]
+        [unixtime_ms].pack("Q>")[2..-1]
       end
 
     end

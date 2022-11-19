@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'active_support' unless defined?(ActiveSupport)
+require "active_support" unless defined?(ActiveSupport)
 
 module Lite
   module Uxid
@@ -10,20 +10,8 @@ module Lite
         extend ActiveSupport::Concern
 
         included do
-          before_create :callback_generate_uxid!, if: proc { respond_to?(:uxid) && !uxid? }
-        end
-
-        class_methods do
-          def find_by_uxid(uxid)
-            find_by(uxid: uxid)
-          end
-
-          def find_by_uxid!(uxid)
-            record = find_by_uxid(uxid)
-            return record unless record.nil?
-
-            raise ActiveRecord::RecordNotFound
-          end
+          before_create :callback_generate_uxid!,
+            if: proc { respond_to?(:uxid) && !uxid? }
         end
 
         private
