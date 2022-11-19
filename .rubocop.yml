@@ -29,6 +29,8 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/**/*'
     - '*.gemspec'
+Metrics/MethodLength:
+  Enabled: false
 RSpec/MultipleExpectations:
   Enabled: false
 Style/ArgumentsForwarding:

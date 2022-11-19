@@ -5,12 +5,6 @@ require "spec_helper"
 RSpec.describe Lite::Uxid::Base do
   let(:base) { described_class.new }
 
-  describe ".encoding_base" do
-    it "to be 62" do
-      expect(base.encoding_base).to eq(62)
-    end
-  end
-
   describe ".encoding_chars" do
     chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 

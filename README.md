@@ -28,6 +28,7 @@ Or install it yourself as:
 * [Hashid](#hashid)
 * [NanoID](#nanoid)
 * [ULID](#ulid)
+* [Options](#options)
 * [ActiveRecord](#active_record)
 * [Benchmarks](#benchmarks)
 
@@ -71,32 +72,45 @@ ULID are not reversible but provide information outside of just randomness.
 Lite::Uxid::Ulid.encode #=> '1mqfg9qa96s8s5f02o1ucf8lcc'
 ```
 
-#### ActiveRecord
+## Options
+
+Local options can be passed to override global options.
+
+```ruby
+Lite::Uxid::Ulid.encode(chars: 'abc123', length: 12) #=> 'a3b12c12c3ca'
+```
+
+## ActiveRecord
 
 **Table**
 
 Add the following attribute to all corresponding tables.
 
 ```ruby
-# omitted
-  t.binary :uxid, index: { unique: true }
-# omitted
+t.string :uxid, index: { unique: true }
 ```
 
 **Setup**
 
-All `nanoid` and `uxid` attributes will be automatically generated and applied when the record is created.
+`uxid` attribute will be automatically generated and applied when the record is created.
 
+#### HashID
 ```ruby
 class User < ActiveRecord::Base
   include Lite::Uxid::Record::Hashid
+end
+```
 
-  # - or -
-
+#### NanoID
+```ruby
+class User < ActiveRecord::Base
   include Lite::Uxid::Record::Nanoid
+end
+```
 
-  # - or -
-
+#### ULID
+```ruby
+class User < ActiveRecord::Base
   include Lite::Uxid::Record::Ulid
 end
 ```
@@ -105,13 +119,17 @@ end
 
 Using one of the mixins above provides a handy method to find records by uxid.
 
+#### HashID methods
 ```ruby
-User.find_by_uxid('x123')   #=> Find record by uxid
-User.find_by_uxid!('x123')  #=> Raises an ActiveRecord::RecordNotFound error if not found
-
-# The following method is for Hashid based Uxid's.
 user = User.new
-user.uxid_to_id             #=> Decodes the records uxid to id (only for Hashid based Id's)
+user.id_to_uxid #=> Encodes the records id to uxid
+user.uxid_to_id #=> Decodes the records uxid to id
+```
+
+#### Finder methods
+```ruby
+User.find_by_uxid('x123')  #=> Find record by uxid
+User.find_by_uxid!('x123') #=> Raises an ActiveRecord::RecordNotFound error if not found
 ```
 
 ## Benchmarks

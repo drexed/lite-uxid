@@ -8,22 +8,16 @@ module Lite
 
       MASK = 0x1f
 
-      class << self
+      def encode(opts = {})
+        chars = opts.delete(:chars) || encoding_chars
+        length = opts.delete(:length) || ulid_length
 
-        def encode
-          klass = new
-          klass.encode
-        end
-
-      end
-
-      def encode
         oct = octect
-        ele = "0" * ulid_length
-        pos = ulid_length - 1
+        ele = "0" * length
+        pos = length - 1
 
         while oct.positive?
-          ele[pos] = encoding_chars[oct & MASK]
+          ele[pos] = chars[oct & MASK]
           oct >>= 5
           pos -= 1
         end

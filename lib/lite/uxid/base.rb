@@ -10,15 +10,11 @@ module Lite
 
       class << self
 
-        def encode
+        def encode(opts = {})
           klass = new
-          klass.encode
+          klass.encode(opts)
         end
 
-      end
-
-      def encoding_base
-        encoding_chars.length
       end
 
       Lite::Uxid.configuration.instance_variables.each do |setting|
