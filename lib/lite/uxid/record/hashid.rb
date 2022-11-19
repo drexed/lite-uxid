@@ -27,6 +27,12 @@ module Lite
           end
         end
 
+        def id_to_uxid
+          return unless respond_to?(:uxid)
+
+          Lite::Uxid::Hashid.encode(id)
+        end
+
         def uxid_to_id
           return unless respond_to?(:uxid)
 
@@ -36,8 +42,7 @@ module Lite
         private
 
         def callback_generate_uxid!
-          hash = Lite::Uxid::Hashid.encode(id)
-          update_column(:uxid, hash)
+          update_column(:uxid, id_to_uxid)
         end
 
       end

@@ -22,6 +22,12 @@ RSpec.describe Lite::Uxid::Record::Hashid do
     end
   end
 
+  describe ".id_to_uxid" do
+    it "to be not nil" do
+      expect(user.id_to_uxid).not_to be_nil
+    end
+  end
+
   describe ".uxid_to_id" do
     it "to be 1" do
       expect(user.uxid_to_id).to eq(1)
