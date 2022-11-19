@@ -58,7 +58,7 @@ Lite::Uxid::Hashid.decode('q5D8inm0') #=> 10
 
 ## NanoID
 
-NanoID are not reversible and are the second fastest ID generator but while unlikely can produce collisions.
+NanoID are irreversible and are the second fastest ID generator but while unlikely can produce collisions.
 
 ```ruby
 Lite::Uxid::Nanoid.encode #=> '0bmHjB5Gx8FTBqJekX6dS6XIXf'
@@ -66,7 +66,7 @@ Lite::Uxid::Nanoid.encode #=> '0bmHjB5Gx8FTBqJekX6dS6XIXf'
 
 ## ULID
 
-ULID are not reversible but provide information outside of just randomness.
+ULID are irreversible but provide information outside of just randomness.
 
 ```ruby
 Lite::Uxid::Ulid.encode #=> '1mqfg9qa96s8s5f02o1ucf8lcc'

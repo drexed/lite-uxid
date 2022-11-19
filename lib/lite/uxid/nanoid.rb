@@ -2,13 +2,10 @@
 
 module Lite
   module Uxid
-    class Nanoid < Base
+    class Nanoid < Irreversible
 
-      def encode(opts = {})
-        chars = opts.delete(:chars) || encoding_chars
-        length = opts.delete(:length) || nanoid_length
-
-        chars.chars.sample(length).join
+      def encode
+        coder_chars.chars.sample(coder_length).join
       end
 
     end
