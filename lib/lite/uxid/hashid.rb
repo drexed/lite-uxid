@@ -2,7 +2,9 @@
 
 module Lite
   module Uxid
-    class Hashid < Lite::Uxid::Base
+    class Hashid < Base
+
+      attr_reader :id
 
       def initialize(id)
         @id = id
@@ -24,38 +26,38 @@ module Lite
       end
 
       def encode
-        encode_chars((@id + encoding_salt) << encoding_length)
+        encode_chars((id + encoding_salt) << hashid_length)
       end
 
       def decode
-        (decode_chars(@id) >> encoding_length) - encoding_salt
+        (decode_chars(id) >> hashid_length) - encoding_salt
       end
 
       private
 
-      def encode_chars(id)
-        return "0" if id.zero?
-        return nil if id.negative?
+      def encode_chars(decoded_id)
+        return "0" if decoded_id.zero?
+        return nil if decoded_id.negative?
 
         str = ""
 
-        while id.positive?
-          str = "#{encoding_chars[id % encoding_base]}#{str}"
-          id /= encoding_base
+        while decoded_id.positive?
+          str = "#{encoding_chars[decoded_id % encoding_base]}#{str}"
+          decoded_id /= encoding_base
         end
 
         str
       end
 
-      def decode_chars(id)
+      def decode_chars(encoded_id)
         pos = 0
         num = 0
-        len = id.length
+        len = encoded_id.length
         max = len - 1
 
         while pos < len
           pow = encoding_base**(max - pos)
-          num += encoding_chars.index(id[pos]) * pow
+          num += encoding_chars.index(encoded_id[pos]) * pow
           pos += 1
         end
 

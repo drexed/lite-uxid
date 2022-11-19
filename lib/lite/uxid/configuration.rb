@@ -5,12 +5,14 @@ module Lite
 
     class Configuration
 
-      attr_accessor :encoding_chars, :encoding_length, :encoding_salt
+      attr_accessor :encoding_chars, :encoding_salt, :hashid_length, :nanoid_length, :ulid_length
 
       def initialize
         @encoding_chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        @encoding_length = 26
         @encoding_salt = 1_369_136
+        @hashid_length = 12
+        @nanoid_length = 21
+        @ulid_length = 26
       end
 
     end

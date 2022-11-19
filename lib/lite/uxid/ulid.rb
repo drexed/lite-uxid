@@ -4,7 +4,7 @@ require "securerandom" unless defined?(SecureRandom)
 
 module Lite
   module Uxid
-    class Ulid < Lite::Uxid::Base
+    class Ulid < Base
 
       MASK = 0x1f
 
@@ -19,8 +19,8 @@ module Lite
 
       def encode
         oct = octect
-        ele = "0" * encoding_length
-        pos = encoding_length - 1
+        ele = "0" * ulid_length
+        pos = ulid_length - 1
 
         while oct.positive?
           ele[pos] = encoding_chars[oct & MASK]

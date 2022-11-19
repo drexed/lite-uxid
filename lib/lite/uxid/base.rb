@@ -8,6 +8,15 @@ module Lite
         @config = Lite::Uxid.configuration
       end
 
+      class << self
+
+        def encode
+          klass = new
+          klass.encode
+        end
+
+      end
+
       def encoding_base
         encoding_chars.length
       end

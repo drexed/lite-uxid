@@ -7,10 +7,8 @@ RSpec.describe Lite::Uxid::Ulid do
 
   describe ".encode" do
     it "to be 26" do
-      n1 = 26
-
-      expect(described_class.encode.length).to eq(n1)
-      expect(encoder.encode.length).to eq(n1)
+      expect(described_class.encode.length).to eq(26)
+      expect(encoder.encode.length).to eq(26)
     end
   end
 
