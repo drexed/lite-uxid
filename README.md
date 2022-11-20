@@ -5,6 +5,7 @@
 
 Lite::Uxid is a library for generating or obfuscating ID's based on different patterns.
 It's very useful to hide the number of resources in your database and protect against enumeration attacks.
+By default, it implements websafe variants of each type.
 
 ## Installation
 
@@ -25,6 +26,7 @@ Or install it yourself as:
 ## Table of Contents
 
 * [Configuration](#configuration)
+* [Usage](#usage)
 * [Hashid](#hashid)
 * [NanoID](#nanoid)
 * [ULID](#ulid)
@@ -40,12 +42,27 @@ Or install it yourself as:
 
 ```ruby
 Lite::Uxid.configure do |config|
-  config.encoding_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  config.encoding_salt = 1_369_136
-  config.hashid_length = 12
-  config.nanoid_length = 21
-  config.ulid_length = 26
+  config.hashid_charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  config.hashid_salt = 1_369_136
+  config.hashid_size = 16
+  config.nanoid_charset = "_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  config.nanoid_size = 21
+  config.ulid_charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  config.ulid_size = 26
 end
+```
+
+## Usage
+
+#### Instance
+```ruby
+coder = Lite::Uxid::Hashid.new(10, size: 12)
+coder.encode #=> '67wGI0'
+```
+
+#### Class
+```ruby
+Lite::Uxid::Hashid.decode('67wGI0', size: 12) #=> 10
 ```
 
 ## Hashid
@@ -53,8 +70,8 @@ end
 [More information](https://hashids.org)
 
 ```ruby
-Lite::Uxid::Hashid.encode(10)       #=> '67wGI0'
-Lite::Uxid::Hashid.decode('67wGI0') #=> 10
+Lite::Uxid::Hashid.encode(10)        #=> '1zWr1m0'
+Lite::Uxid::Hashid.decode('1zWr1m0') #=> 10
 ```
 
 ## NanoID
@@ -70,12 +87,12 @@ Lite::Uxid::Nanoid.encode #=> 'sMuNUa3Cegn6r5GRQ4Ij2'
 [More information](https://github.com/ulid/spec)
 
 ```ruby
-Lite::Uxid::Ulid.encode #=> '01gial8st6qrroptaks2tj4smq'
+Lite::Uxid::Ulid.encode #=> '01GJAY9KGR539EZF4QWYEJGSN7'
 ```
 
 ## UUID
 
-[More information](https://en.wikipedia.org/wiki/Universally_unique_identifier)
+Implements v4 of the specification. [More information](https://en.wikipedia.org/wiki/Universally_unique_identifier)
 
 ```ruby
 Lite::Uxid::Uuid.encode #=> '4376a67e-1189-44b3-a599-7f7566bf105b'
@@ -86,7 +103,7 @@ Lite::Uxid::Uuid.encode #=> '4376a67e-1189-44b3-a599-7f7566bf105b'
 Local options can be passed to override global options.
 
 ```ruby
-Lite::Uxid::Ulid.encode(chars: 'abc123', length: 12) #=> 'a3b12c12c3ca'
+Lite::Uxid::Ulid.encode(chars: 'abc123', size: 12) #=> 'a3b12c12c3ca'
 ```
 
 ## ActiveRecord

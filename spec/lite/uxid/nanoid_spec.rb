@@ -7,8 +7,8 @@ RSpec.describe Lite::Uxid::Nanoid do
 
   describe ".encode" do
     it "to be 21" do
-      expect(described_class.encode.length).to eq(21)
-      expect(encoder.encode.length).to eq(21)
+      expect(described_class.encode.size).to eq(21)
+      expect(encoder.encode.size).to eq(21)
     end
   end
 

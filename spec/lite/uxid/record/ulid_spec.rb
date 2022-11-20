@@ -10,7 +10,7 @@ RSpec.describe Lite::Uxid::Record::Ulid do
 
   describe ".callback_generate_uxid!" do
     it "to be 26" do
-      expect(user.uxid.length).to eq(26)
+      expect(user.uxid.size).to eq(26)
     end
 
     it 'to be "fake-id"' do

@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 Lite::Uxid.configure do |config|
-  config.encoding_chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  config.encoding_salt = 1_369_136
-  config.hashid_length = 12
-  config.nanoid_length = 21
-  config.ulid_length = 26
+  config.hashid_charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  config.hashid_salt = 1_369_136
+  config.hashid_size = 16
+  config.nanoid_charset = "_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  config.nanoid_size = 21
+  config.ulid_charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  config.ulid_size = 26
 end

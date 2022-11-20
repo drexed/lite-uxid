@@ -5,7 +5,9 @@ module Lite
     class Nanoid < Irreversible
 
       def encode
-        coder_chars.chars.sample(coder_length).join
+        (0...coder_size).each_with_object(+"") do |i, str|
+          str << coder_charset[coder_bytes[i] & 63]
+        end
       end
 
     end

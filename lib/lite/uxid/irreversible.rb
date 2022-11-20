@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "securerandom" unless defined?(SecureRandom)
+
 module Lite
   module Uxid
     class Irreversible
@@ -34,14 +36,14 @@ module Lite
 
       private
 
-      def coder_base
-        @coder_base ||= coder_chars.length
+      def coder_bytes
+        @coder_bytes ||= SecureRandom.random_bytes(coder_size).bytes
       end
 
-      def coder_chars
-        @coder_chars ||=
-          opts.delete(:chars) ||
-          Lite::Uxid.configuration.encoding_chars
+      def coder_charset
+        @coder_charset ||=
+          opts.delete(:charset) ||
+          Lite::Uxid.configuration.send("#{coder_class.downcase}_charset")
       end
 
       def coder_class
@@ -49,15 +51,19 @@ module Lite
       end
 
       def coder_length
-        @coder_length ||=
-          opts.delete(:length) ||
-          Lite::Uxid.configuration.send("#{coder_class.downcase}_length")
+        @coder_length ||= coder_charset.size
       end
 
       def coder_salt
         @coder_salt ||=
           opts.delete(:salt) ||
-          Lite::Uxid.configuration.encoding_salt
+          Lite::Uxid.configuration.send("#{coder_class.downcase}_salt")
+      end
+
+      def coder_size
+        @coder_size ||=
+          opts.delete(:size) ||
+          Lite::Uxid.configuration.send("#{coder_class.downcase}_size")
       end
 
     end

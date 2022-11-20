@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "securerandom" unless defined?(SecureRandom)
-
 module Lite
   module Uxid
     class Ulid < Irreversible
@@ -10,11 +8,11 @@ module Lite
 
       def encode
         oct = octect
-        ele = "0" * coder_length
-        pos = coder_length - 1
+        ele = "0" * coder_size
+        pos = coder_size - 1
 
         while oct.positive?
-          ele[pos] = coder_chars[oct & MASK]
+          ele[pos] = coder_charset[oct & MASK]
           oct >>= 5
           pos -= 1
         end
@@ -35,7 +33,7 @@ module Lite
 
       def unixtime_ms
         time = Time.respond_to?(:current) ? Time.current : Time.now
-        (time.to_f * 1_000).to_i
+        time.to_i * 1_000
       end
 
       def unixtime_48bit

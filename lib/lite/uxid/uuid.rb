@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "securerandom" unless defined?(SecureRandom)
-
 module Lite
   module Uxid
     class Uuid < Irreversible

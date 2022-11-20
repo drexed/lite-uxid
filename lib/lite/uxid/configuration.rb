@@ -5,14 +5,16 @@ module Lite
 
     class Configuration
 
-      attr_accessor :encoding_chars, :encoding_salt, :hashid_length, :nanoid_length, :ulid_length
+      attr_accessor :hashid_charset, :hashid_salt, :hashid_size, :nanoid_charset, :nanoid_size, :ulid_charset, :ulid_size
 
       def initialize
-        @encoding_chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        @encoding_salt = 1_369_136
-        @hashid_length = 12
-        @nanoid_length = 21
-        @ulid_length = 26
+        @hashid_charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        @hashid_salt = 1_369_136
+        @hashid_size = 16
+        @nanoid_charset = "_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        @nanoid_size = 21
+        @ulid_charset = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
+        @ulid_size = 26
       end
 
     end

@@ -3,27 +3,27 @@
 require "spec_helper"
 
 RSpec.describe Lite::Uxid::Hashid do
-  let(:nid) { 10 }
-  let(:hid) { "67wGI0" }
-  let(:encoder) { described_class.new(nid) }
-  let(:decoder) { described_class.new(hid) }
+  let(:id) { 10 }
+  let(:hashid) { "1zWr1m0" }
+  let(:encoder) { described_class.new(id) }
+  let(:decoder) { described_class.new(hashid) }
 
   describe ".decode" do
     it "to be 10" do
-      expect(described_class.decode(hid)).to eq(nid)
-      expect(decoder.decode).to eq(nid)
+      expect(described_class.decode(hashid)).to eq(id)
+      expect(decoder.decode).to eq(id)
     end
   end
 
   describe ".encode" do
-    it 'to be "67wGI0"' do
-      expect(described_class.encode(nid)).to eq(hid)
-      expect(encoder.encode).to eq(hid)
+    it 'to be "1zWr1m0"' do
+      expect(described_class.encode(id)).to eq(hashid)
+      expect(encoder.encode).to eq(hashid)
     end
 
-    it "to be 6" do
-      expect(described_class.encode(nid).length).to eq(6)
-      expect(encoder.encode.length).to eq(6)
+    it "to be 7" do
+      expect(described_class.encode(id).size).to eq(7)
+      expect(encoder.encode.size).to eq(7)
     end
   end
 
