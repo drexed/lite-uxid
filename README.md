@@ -28,6 +28,7 @@ Or install it yourself as:
 * [Hashid](#hashid)
 * [NanoID](#nanoid)
 * [ULID](#ulid)
+* [UUID](#uuid)
 * [Options](#options)
 * [ActiveRecord](#active_record)
 * [Benchmarks](#benchmarks)
@@ -49,27 +50,35 @@ end
 
 ## Hashid
 
-Hashid's are reversible and is the most performant generator.
+[More information](https://hashids.org)
 
 ```ruby
-Lite::Uxid::Hashid.encode(10)         #=> 'q5D8inm0'
-Lite::Uxid::Hashid.decode('q5D8inm0') #=> 10
+Lite::Uxid::Hashid.encode(10)       #=> '67wGI0'
+Lite::Uxid::Hashid.decode('67wGI0') #=> 10
 ```
 
 ## NanoID
 
-NanoID are irreversible and are the second fastest ID generator but while unlikely can produce collisions.
+[More information](https://github.com/ai/nanoid)
 
 ```ruby
-Lite::Uxid::Nanoid.encode #=> '0bmHjB5Gx8FTBqJekX6dS6XIXf'
+Lite::Uxid::Nanoid.encode #=> 'sMuNUa3Cegn6r5GRQ4Ij2'
 ```
 
 ## ULID
 
-ULID are irreversible but provide information outside of just randomness.
+[More information](https://github.com/ulid/spec)
 
 ```ruby
-Lite::Uxid::Ulid.encode #=> '1mqfg9qa96s8s5f02o1ucf8lcc'
+Lite::Uxid::Ulid.encode #=> '01gial8st6qrroptaks2tj4smq'
+```
+
+## UUID
+
+[More information](https://en.wikipedia.org/wiki/Universally_unique_identifier)
+
+```ruby
+Lite::Uxid::Uuid.encode #=> '4376a67e-1189-44b3-a599-7f7566bf105b'
 ```
 
 ## Options
@@ -115,6 +124,13 @@ class User < ActiveRecord::Base
 end
 ```
 
+#### UUID
+```ruby
+class User < ActiveRecord::Base
+  include Lite::Uxid::Record::Uuid
+end
+```
+
 **Usage**
 
 Using one of the mixins above provides a handy method to find records by uxid.
@@ -134,7 +150,7 @@ User.find_by_uxid!('x123') #=> Raises an ActiveRecord::RecordNotFound error if n
 
 ## Benchmarks
 
-The classes ranked from fastest to slowest are `Hashid`, `Nanoid`, and `Ulid`.
+The classes ranked from fastest to slowest are `UUID`, `Hashid`, `Nanoid`, and `Ulid`.
 
 View how each compares by running the [benchmarks](https://github.com/drexed/lite-uxid/tree/master/benchmarks).
 
