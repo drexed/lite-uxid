@@ -138,6 +138,11 @@ The classes ranked from fastest to slowest are `Hashid`, `Nanoid`, and `Ulid`.
 
 View how each compares by running the [benchmarks](https://github.com/drexed/lite-uxid/tree/master/benchmarks).
 
+#### Alternatives
+
+Learn more about alternative functions and more advance hashing setups:
+[hashids.org](https://hashids.org)
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
