@@ -10,7 +10,9 @@ module Lite
         extend ActiveSupport::Concern
 
         included do
-          after_create :callback_generate_uxid!, if: proc { respond_to?(:uxid) && !uxid? }
+          after_commit :callback_generate_uxid!,
+                       if: proc { respond_to?(:uxid) && !uxid? },
+                       on: :create
         end
 
         class_methods do

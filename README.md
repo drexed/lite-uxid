@@ -126,7 +126,15 @@ Passable options are:
 Add the following attribute to all corresponding tables.
 
 ```ruby
-t.string :uxid, index: { unique: true }
+# NOTE: null: true has to be set for HashID's
+# since an ID must exist before it gets created.
+t.string :uxid, null: false, index: { unique: true }
+```
+
+If using UUID and your database supports it:
+
+```ruby
+t.uuid :uxid, null: false, index: { unique: true }
 ```
 
 **Setup**
