@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2024-09-20
+### Changed
+- Ruby send perf improvements
+
 ## [1.4.0] - 2022-11-20
 ### Changed
 - Improved global config flexibility

@@ -43,7 +43,7 @@ module Lite
       def coder_charset
         @coder_charset ||=
           opts.delete(:charset) ||
-          Lite::Uxid.configuration.send("#{coder_class.downcase}_charset")
+          Lite::Uxid.configuration.send(:"#{coder_class.downcase}_charset")
       end
 
       def coder_class
@@ -57,13 +57,13 @@ module Lite
       def coder_salt
         @coder_salt ||=
           opts.delete(:salt) ||
-          Lite::Uxid.configuration.send("#{coder_class.downcase}_salt")
+          Lite::Uxid.configuration.send(:"#{coder_class.downcase}_salt")
       end
 
       def coder_size
         @coder_size ||=
           opts.delete(:size) ||
-          Lite::Uxid.configuration.send("#{coder_class.downcase}_size")
+          Lite::Uxid.configuration.send(:"#{coder_class.downcase}_size")
       end
 
     end
