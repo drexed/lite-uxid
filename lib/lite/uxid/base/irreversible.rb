@@ -44,10 +44,6 @@ module Lite
           opts.delete(key) || Lite::Uxid.configuration.send(sym_key)
         end
 
-        def coder_bytes
-          @coder_bytes ||= SecureRandom.random_bytes(coder_size).bytes
-        end
-
         def coder_charset
           @coder_charset ||= coder_value_for(:charset)
         end

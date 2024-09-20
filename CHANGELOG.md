@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.2] - 2024-09-20
+### Changed
+- Fixed nanoid of differing length error
+
 ## [1.5.1] - 2024-09-20
 ### Changed
 - Use after commit on create instead of after create

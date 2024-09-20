@@ -3,7 +3,7 @@
 module Lite
   module Uxid
 
-    VERSION = "1.5.1"
+    VERSION = "1.5.2"
 
   end
 end
