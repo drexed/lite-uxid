@@ -2,7 +2,7 @@
 
 module Lite
   module Uxid
-    class Hashid < Reversible
+    class Hashid < Base::Reversible
 
       def encode
         encode_chars((id + coder_salt) << coder_size)

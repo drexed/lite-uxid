@@ -2,7 +2,7 @@
 
 module Lite
   module Uxid
-    class Nanoid < Irreversible
+    class Nanoid < Base::Irreversible
 
       def encode
         (0...coder_size).each_with_object(+"") do |i, str|

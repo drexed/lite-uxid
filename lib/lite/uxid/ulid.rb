@@ -2,7 +2,7 @@
 
 module Lite
   module Uxid
-    class Ulid < Irreversible
+    class Ulid < Base::Irreversible
 
       MASK = 0x1f
 

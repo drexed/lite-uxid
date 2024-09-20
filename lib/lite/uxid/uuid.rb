@@ -2,10 +2,15 @@
 
 module Lite
   module Uxid
-    class Uuid < Irreversible
+    class Uuid < Base::Irreversible
 
       def encode
-        SecureRandom.uuid
+        case coder_version
+        when 7
+          SecureRandom.uuid_v7
+        else
+          SecureRandom.uuid
+        end
       end
 
     end

@@ -49,6 +49,7 @@ Lite::Uxid.configure do |config|
   config.nanoid_size = 21
   config.ulid_charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   config.ulid_size = 26
+  config.uuid_version = 4
 end
 ```
 
@@ -92,7 +93,7 @@ Lite::Uxid::Ulid.encode #=> '01GJAY9KGR539EZF4QWYEJGSN7'
 
 ## UUID
 
-Implements v4 of the specification. [More information](https://en.wikipedia.org/wiki/Universally_unique_identifier)
+Implements `v4` and `v7` of the specification. [More information](https://en.wikipedia.org/wiki/Universally_unique_identifier)
 
 ```ruby
 Lite::Uxid::Uuid.encode #=> '4376a67e-1189-44b3-a599-7f7566bf105b'

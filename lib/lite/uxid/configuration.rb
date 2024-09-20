@@ -5,7 +5,10 @@ module Lite
 
     class Configuration
 
-      attr_accessor :hashid_charset, :hashid_salt, :hashid_size, :nanoid_charset, :nanoid_size, :ulid_charset, :ulid_size
+      attr_accessor :hashid_charset, :hashid_size, :hashid_salt,
+                    :nanoid_charset, :nanoid_size,
+                    :ulid_charset,   :ulid_size,
+                    :uuid_version
 
       def initialize
         @hashid_charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -15,6 +18,7 @@ module Lite
         @nanoid_size = 21
         @ulid_charset = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
         @ulid_size = 26
+        @uuid_version = 4
       end
 
     end
