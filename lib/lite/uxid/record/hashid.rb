@@ -15,7 +15,7 @@ module Lite
 
         class_methods do
           def find_by_uxid(uxid)
-            decoded_id = Lite::Uxid::Hashid.decode(uxid)
+            decoded_id = Lite::Uxid::Hashid.decode(uxid, prefix: new.uxid_prefix)
             find_by(id: decoded_id)
           end
 
@@ -30,13 +30,17 @@ module Lite
         def id_to_uxid
           return unless respond_to?(:uxid)
 
-          Lite::Uxid::Hashid.encode(id)
+          Lite::Uxid::Hashid.encode(id, prefix: uxid_prefix)
         end
 
         def uxid_to_id
           return unless respond_to?(:uxid)
 
-          Lite::Uxid::Hashid.decode(uxid)
+          Lite::Uxid::Hashid.decode(uxid, prefix: uxid_prefix)
+        end
+
+        def uxid_prefix
+          nil
         end
 
         private

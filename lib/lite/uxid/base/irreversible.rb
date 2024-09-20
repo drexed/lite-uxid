@@ -60,6 +60,10 @@ module Lite
           @coder_length ||= coder_charset.size
         end
 
+        def coder_prefix
+          @coder_prefix ||= opts.delete(:prefix)
+        end
+
         def coder_salt
           @coder_salt ||= coder_value_for(:salt)
         end

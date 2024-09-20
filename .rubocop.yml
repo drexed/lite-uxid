@@ -35,6 +35,8 @@ Metrics/MethodLength:
   Enabled: false
 RSpec/MultipleExpectations:
   Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
 Style/ArgumentsForwarding:
   Enabled: false
 Style/Documentation:

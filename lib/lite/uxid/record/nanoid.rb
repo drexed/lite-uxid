@@ -13,13 +13,17 @@ module Lite
           before_create :callback_generate_uxid!, if: proc { respond_to?(:uxid) && !uxid? }
         end
 
+        def uxid_prefix
+          nil
+        end
+
         private
 
         def callback_generate_uxid!
           random_nanoid = nil
 
           loop do
-            random_nanoid = Lite::Uxid::Nanoid.encode
+            random_nanoid = Lite::Uxid::Nanoid.encode(prefix: uxid_prefix)
             break unless self.class.exists?(uxid: random_nanoid)
           end
 

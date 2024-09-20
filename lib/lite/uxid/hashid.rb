@@ -5,11 +5,13 @@ module Lite
     class Hashid < Base::Reversible
 
       def encode
-        encode_chars((id + coder_salt) << coder_size)
+        uxid = encode_chars((id + coder_salt) << coder_size)
+        "#{coder_prefix}#{uxid}"
       end
 
       def decode
-        (decode_chars(id) >> coder_size) - coder_salt
+        uxid = id.delete_prefix(coder_prefix.to_s)
+        (decode_chars(uxid) >> coder_size) - coder_salt
       end
 
       private

@@ -104,7 +104,19 @@ Lite::Uxid::Uuid.encode #=> '4376a67e-1189-44b3-a599-7f7566bf105b'
 Local options can be passed to override global options.
 
 ```ruby
-Lite::Uxid::Ulid.encode(chars: 'abc123', size: 12) #=> 'a3b12c12c3ca'
+Lite::Uxid::Ulid.encode(charset: 'abc123', size: 12) #=> 'a3b12c12c3ca'
+```
+
+Passable options are:
+
+```ruby
+{
+  charset: 'string',  # Available for: hashid, nanoid, ulid
+  salt:    'string',  # Available for: hashid
+  size:    'integer', # Available for: hashid, nanoid, ulid
+  version: 'integer', # Available for: uuid
+  prefix:  'string'   # Available for: hashid, nanoid
+}
 ```
 
 ## ActiveRecord
@@ -146,6 +158,18 @@ end
 ```ruby
 class User < ActiveRecord::Base
   include Lite::Uxid::Record::Uuid
+end
+```
+
+Add a prefix to `hashid` and `nanoid` record types by adding a `uxid_prefix` method.
+
+```ruby
+class User < ActiveRecord::Base
+  include Lite::Uxid::Record::Hashid
+
+  def uxid_prefix
+    "sub_"
+  end
 end
 ```
 
