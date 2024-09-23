@@ -1,17 +1,15 @@
 # frozen_string_literal: true
 
-require "active_support" unless defined?(ActiveSupport)
-
 module Lite
   module Uxid
     module Record
       module Nanoid
 
-        extend ActiveSupport::Concern
-
-        included do
-          before_create :callback_generate_uxid!,
-                        if: proc { respond_to?(:uxid) && !uxid? }
+        def self.included(base)
+          base.class_eval do
+            before_create :callback_generate_uxid!,
+                          if: proc { respond_to?(:uxid) && !uxid? }
+          end
         end
 
         def uxid_prefix
@@ -24,7 +22,7 @@ module Lite
           random_nanoid = nil
 
           loop do
-            random_nanoid = Lite::Uxid::Nanoid.encode(prefix: uxid_prefix)
+            random_nanoid = Lite::Uxid::Irreversible::Nanoid.encode(prefix: uxid_prefix)
             break unless self.class.exists?(uxid: random_nanoid)
           end
 

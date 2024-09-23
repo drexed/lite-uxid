@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe Lite::Uxid::Hashid do
+RSpec.describe Lite::Uxid::Reversible::Hashid do
   let(:prefix) { nil }
   let(:id) { 10 }
   let(:hashid) { "1zWr1m0" }

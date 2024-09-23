@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-RSpec.describe Lite::Uxid::Ulid do
+RSpec.describe Lite::Uxid::Irreversible::Ulid do
   let(:encoder) { described_class.new }
 
   describe ".encode" do
