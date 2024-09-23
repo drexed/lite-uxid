@@ -27,9 +27,9 @@ Or install it yourself as:
 
 * [Configuration](#configuration)
 * [Usage](#usage)
-* [Hashid](#hashid)
+* [HashID](#hashid)
 * [NanoID](#nanoid)
-* [Obfuscateid](#obfuscateid)
+* [ObfuscateID](#obfuscateid)
 * [ULID](#ulid)
 * [UUID](#uuid)
 * [Options](#options)
@@ -88,13 +88,13 @@ Lite::Uxid::Reversible::Hashid.decode('1zWr1m0') #=> 10
 Lite::Uxid::Irreversible::Nanoid.encode #=> 'sMuNUa3Cegn6r5GRQ4Ij2'
 ```
 
-## ScatterID
+## ObfuscateID
 
 [More information](https://github.com/namick/scatter_swap)
 
 ```ruby
-Lite::Uxid::Reversible::Obfuscateid.encode(10)           #=> '2056964183'
-Lite::Uxid::Reversible::Obfuscateid.decode('2056964183') #=> 10
+Lite::Uxid::Reversible::Obfuscateid.encode(10)         #=> '2056964183'
+Lite::Uxid::Reversible::Obfuscateid.decode(2056964183) #=> 10
 ```
 
 ## ULID
@@ -159,34 +159,11 @@ t.uuid :uxid, null: false, index: { unique: true }
 #### HashID
 ```ruby
 class User < ActiveRecord::Base
+  # Pick one:
   include Lite::Uxid::Record::Hashid
-end
-```
-
-#### NanoID
-```ruby
-class User < ActiveRecord::Base
   include Lite::Uxid::Record::Nanoid
-end
-```
-
-#### ScatterID
-```ruby
-class User < ActiveRecord::Base
   include Lite::Uxid::Record::Obfuscateid
-end
-```
-
-#### ULID
-```ruby
-class User < ActiveRecord::Base
   include Lite::Uxid::Record::Ulid
-end
-```
-
-#### UUID
-```ruby
-class User < ActiveRecord::Base
   include Lite::Uxid::Record::Uuid
 end
 ```
@@ -198,16 +175,16 @@ class User < ActiveRecord::Base
   include Lite::Uxid::Record::Hashid
 
   def uxid_prefix
-    "sub_"
+    "usr_"
   end
 end
 ```
 
 **Usage**
 
-Using one of the mixins above provides a handy method to find records by uxid.
+Using the `hashid` and `nanoid` above provide handy methods to find records by uxid.
 
-#### HashID methods
+#### Hashing methods
 ```ruby
 user = User.new
 user.id_to_uxid #=> Encodes the records id to uxid
@@ -222,14 +199,9 @@ User.find_by_uxid!('x123') #=> Raises an ActiveRecord::RecordNotFound error if n
 
 ## Benchmarks
 
-The classes ranked from fastest to slowest are `UUID`, `Hashid`, `Nanoid`, and `Ulid`.
+The classes ranked from fastest to slowest are `UUID`, `HashID`, `NanoID`, `ULID`, and `ObfuscateID`.
 
 View how each compares by running the [benchmarks](https://github.com/drexed/lite-uxid/tree/master/benchmarks).
-
-#### Alternatives
-
-Learn more about alternative functions and more advance hashing setups:
-[hashids.org](https://hashids.org)
 
 ## Development
 

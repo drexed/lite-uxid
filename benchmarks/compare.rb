@@ -8,22 +8,30 @@ require "lite/uxid"
 Benchmark.ips do |x|
   x.report("Hashid") do
     id = rand(1..1_000_000)
-    Lite::Uxid::Hashid.encode(id)
+    Lite::Uxid::Reversible::Hashid.encode(id)
   end
 
+  x.report("Obfuscateid") do
+    id = rand(1..1_000_000)
+    Lite::Uxid::Reversible::Obfuscateid.encode(id)
+  end
+
+  # The irreversible examples include `rand` simulate
+  # the extra work just like reversible examples.
+
   x.report("NanoID") do
-    _id = rand(1..1_000_000) # To simulate the extra work from `rand`
-    Lite::Uxid::Nanoid.encode
+    _id = rand(1..1_000_000)
+    Lite::Uxid::Irreversible::Nanoid.encode
   end
 
   x.report("ULID") do
-    _id = rand(1..1_000_000) # To simulate the extra work from `rand`
-    Lite::Uxid::Ulid.encode
+    _id = rand(1..1_000_000)
+    Lite::Uxid::Irreversible::Ulid.encode
   end
 
   x.report("UUID") do
-    _id = rand(1..1_000_000) # To simulate the extra work from `rand`
-    Lite::Uxid::Uuid.encode
+    _id = rand(1..1_000_000)
+    Lite::Uxid::Irreversible::Uuid.encode
   end
 
   x.compare!

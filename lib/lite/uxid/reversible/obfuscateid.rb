@@ -8,16 +8,13 @@ module Lite
         def encode
           swap
           scatter
-
-          "#{coder_prefix}#{joined_array}"
+          result
         end
 
         def decode
-          @id = id.delete_prefix(coder_prefix.to_s)
-
           unscatter
           unswap
-          joined_array.to_i
+          result
         end
 
         private
@@ -30,8 +27,8 @@ module Lite
           @coder_array ||= zero_padded_id.chars.collect(&:to_i)
         end
 
-        def joined_array
-          coder_array.join
+        def result
+          coder_array.join.to_i
         end
 
         def swapper_map(index)
