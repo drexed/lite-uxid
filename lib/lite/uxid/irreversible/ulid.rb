@@ -8,17 +8,17 @@ module Lite
         MASK = 0x1f
 
         def encode
+          encoded_id = "0" * coder_size
           oct = octect
-          ele = "0" * coder_size
           pos = coder_size - 1
 
           while oct.positive?
-            ele[pos] = coder_charset[oct & MASK]
+            encoded_id[pos] = coder_charset[oct & MASK]
             oct >>= 5
             pos -= 1
           end
 
-          ele
+          encoded_id
         end
 
         private

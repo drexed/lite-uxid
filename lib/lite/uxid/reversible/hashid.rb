@@ -6,13 +6,13 @@ module Lite
       class Hashid < Base
 
         def encode
-          uxid = encode_chars((id + coder_salt) << coder_size)
-          "#{coder_prefix}#{uxid}"
+          encoded_id = encode_chars((id + coder_salt) << coder_size)
+          "#{coder_prefix}#{encoded_id}"
         end
 
         def decode
-          uxid = id.delete_prefix(coder_prefix.to_s)
-          (decode_chars(uxid) >> coder_size) - coder_salt
+          encoded_id = id.delete_prefix(coder_prefix.to_s)
+          (decode_chars(encoded_id) >> coder_size) - coder_salt
         end
 
         private

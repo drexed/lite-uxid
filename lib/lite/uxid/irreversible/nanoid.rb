@@ -6,7 +6,7 @@ module Lite
       class Nanoid < Base
 
         def encode
-          uxid = +""
+          encoded_id = +""
 
           loop do
             cached_bytes = bytes
@@ -16,12 +16,12 @@ module Lite
               char = byte && coder_charset[byte]
               next unless char
 
-              uxid << char
-              return "#{coder_prefix}#{uxid}" if uxid.size == coder_size
+              encoded_id << char
+              return "#{coder_prefix}#{encoded_id}" if encoded_id.size == coder_size
             end
           end
 
-          "#{coder_prefix}#{uxid}"
+          "#{coder_prefix}#{encoded_id}"
         end
 
         private

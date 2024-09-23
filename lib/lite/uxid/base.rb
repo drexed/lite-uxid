@@ -45,6 +45,10 @@ module Lite
         @coder_size ||= coder_value_for(:size)
       end
 
+      def coder_spin
+        @coder_spin ||= coder_value_for(:spin)
+      end
+
       def coder_version
         @coder_version ||= coder_value_for(:version)
       end
