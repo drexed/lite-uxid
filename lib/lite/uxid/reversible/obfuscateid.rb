@@ -3,7 +3,7 @@
 module Lite
   module Uxid
     module Reversible
-      class Scatterid < Base
+      class Obfuscateid < Base
 
         def encode
           swap

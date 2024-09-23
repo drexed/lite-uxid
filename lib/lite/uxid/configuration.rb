@@ -11,7 +11,7 @@ module Lite
 
       attr_accessor :hashid_charset, :hashid_size, :hashid_salt,
                     :nanoid_charset, :nanoid_size,
-                    :scatterid_spin,
+                    :obfuscateid_spin,
                     :ulid_charset, :ulid_size,
                     :uuid_version
 
@@ -21,7 +21,7 @@ module Lite
         @hashid_size = 16
         @nanoid_charset = WEB_SAFE
         @nanoid_size = 21
-        @scatterid_spin = 0
+        @obfuscateid_spin = 0
         @ulid_charset = COCKFORDS_32
         @ulid_size = 26
         @uuid_version = 4

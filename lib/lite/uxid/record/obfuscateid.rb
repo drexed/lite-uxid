@@ -3,7 +3,7 @@
 module Lite
   module Uxid
     module Record
-      module Scatterid
+      module Obfuscateid
 
         def self.included(base)
           base.extend ClassMethods
@@ -17,7 +17,7 @@ module Lite
         module ClassMethods
 
           def find_by_uxid(uxid)
-            decoded_id = Lite::Uxid::Reversible::Scatterid.decode(uxid, prefix: new.uxid_prefix)
+            decoded_id = Lite::Uxid::Reversible::Obfuscateid.decode(uxid, prefix: new.uxid_prefix)
             find_by(id: decoded_id)
           end
 
@@ -33,13 +33,13 @@ module Lite
         def id_to_uxid
           return unless respond_to?(:uxid)
 
-          Lite::Uxid::Reversible::Scatterid.encode(id, prefix: uxid_prefix)
+          Lite::Uxid::Reversible::Obfuscateid.encode(id, prefix: uxid_prefix)
         end
 
         def uxid_to_id
           return unless respond_to?(:uxid)
 
-          Lite::Uxid::Reversible::Scatterid.decode(uxid, prefix: uxid_prefix)
+          Lite::Uxid::Reversible::Obfuscateid.decode(uxid, prefix: uxid_prefix)
         end
 
         def uxid_prefix

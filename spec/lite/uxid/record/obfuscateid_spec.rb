@@ -2,10 +2,10 @@
 
 require "spec_helper"
 
-class ScatteridUser < User; end
+class ObfuscateidUser < User; end
 
-RSpec.describe Lite::Uxid::Record::Scatterid do
-  let(:klass) { ScatteridUser.include(described_class) }
+RSpec.describe Lite::Uxid::Record::Obfuscateid do
+  let(:klass) { ObfuscateidUser.include(described_class) }
   let(:user) { klass.create! }
 
   describe ".find_by_uxid(!)" do

@@ -29,7 +29,7 @@ Or install it yourself as:
 * [Usage](#usage)
 * [Hashid](#hashid)
 * [NanoID](#nanoid)
-* [Scatterid](#scatterid)
+* [Obfuscateid](#obfuscateid)
 * [ULID](#ulid)
 * [UUID](#uuid)
 * [Options](#options)
@@ -93,8 +93,8 @@ Lite::Uxid::Irreversible::Nanoid.encode #=> 'sMuNUa3Cegn6r5GRQ4Ij2'
 [More information](https://github.com/namick/scatter_swap)
 
 ```ruby
-Lite::Uxid::Reversible::Scatterid.encode(10)           #=> '2056964183'
-Lite::Uxid::Reversible::Scatterid.decode('2056964183') #=> 10
+Lite::Uxid::Reversible::Obfuscateid.encode(10)           #=> '2056964183'
+Lite::Uxid::Reversible::Obfuscateid.decode('2056964183') #=> 10
 ```
 
 ## ULID
@@ -128,7 +128,7 @@ Passable options are:
   charset: 'string',  # Available for: hashid, nanoid, ulid
   salt:    'string',  # Available for: hashid
   size:    'integer', # Available for: hashid, nanoid, ulid
-  spin:    'integer', # Available for: scatterid
+  spin:    'integer', # Available for: obfuscateid
   version: 'integer', # Available for: uuid
   prefix:  'string'   # Available for: hashid, nanoid
 }
@@ -173,7 +173,7 @@ end
 #### ScatterID
 ```ruby
 class User < ActiveRecord::Base
-  include Lite::Uxid::Record::Scatterid
+  include Lite::Uxid::Record::Obfuscateid
 end
 ```
 
