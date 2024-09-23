@@ -6,6 +6,7 @@ Lite::Uxid.configure do |config|
   config.hashid_size = 16
   config.nanoid_charset = "_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
   config.nanoid_size = 21
+  config.scatterid_spin = 0
   config.ulid_charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   config.ulid_size = 26
   config.uuid_version = 4
