@@ -3,6 +3,10 @@
 module Lite
   module Uxid
 
+    ALPHANUMERIC = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    COCKFORDS_32 = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
+    WEB_SAFE     = "#{ALPHANUMERIC}-_".freeze
+
     class Configuration
 
       attr_accessor :hashid_charset, :hashid_size, :hashid_salt,
@@ -11,12 +15,12 @@ module Lite
                     :uuid_version
 
       def initialize
-        @hashid_charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        @hashid_charset = ALPHANUMERIC
         @hashid_salt = 1_369_136
         @hashid_size = 16
-        @nanoid_charset = "_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        @nanoid_charset = WEB_SAFE
         @nanoid_size = 21
-        @ulid_charset = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
+        @ulid_charset = COCKFORDS_32
         @ulid_size = 26
         @uuid_version = 4
       end

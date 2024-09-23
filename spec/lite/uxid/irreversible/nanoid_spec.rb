@@ -16,7 +16,6 @@ RSpec.describe Lite::Uxid::Irreversible::Nanoid do
       let(:prefix) { "test_" }
 
       it 'to be "test_1zWr1m0"' do
-        pp encoder.encode
         expect(described_class.encode(prefix: prefix).starts_with?(prefix)).to be(true)
         expect(encoder.encode.starts_with?(prefix)).to be(true)
       end

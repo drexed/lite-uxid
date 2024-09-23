@@ -41,13 +41,17 @@ Or install it yourself as:
 `config/initalizers/lite_uxid.rb`
 
 ```ruby
+Lite::Uxid::ALPHANUMERIC = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+Lite::Uxid::COCKFORDS_32 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+Lite::Uxid::WEB_SAFE     = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_"
+
 Lite::Uxid.configure do |config|
-  config.hashid_charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  config.hashid_charset = ALPHANUMERIC
   config.hashid_salt = 1_369_136
   config.hashid_size = 16
-  config.nanoid_charset = "_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  config.nanoid_charset = WEB_SAFE
   config.nanoid_size = 21
-  config.ulid_charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  config.ulid_charset = COCKFORDS_32
   config.ulid_size = 26
   config.uuid_version = 4
 end
@@ -57,13 +61,13 @@ end
 
 #### Instance
 ```ruby
-coder = Lite::Uxid::Hashid.new(10, size: 12)
+coder = Lite::Uxid::Reversible::Hashid.new(10, size: 12)
 coder.encode #=> '67wGI0'
 ```
 
 #### Class
 ```ruby
-Lite::Uxid::Hashid.decode('67wGI0', size: 12) #=> 10
+Lite::Uxid::Reversible::Hashid.decode('67wGI0', size: 12) #=> 10
 ```
 
 ## Hashid
@@ -71,8 +75,8 @@ Lite::Uxid::Hashid.decode('67wGI0', size: 12) #=> 10
 [More information](https://hashids.org)
 
 ```ruby
-Lite::Uxid::Hashid.encode(10)        #=> '1zWr1m0'
-Lite::Uxid::Hashid.decode('1zWr1m0') #=> 10
+Lite::Uxid::Reversible::Hashid.encode(10)        #=> '1zWr1m0'
+Lite::Uxid::Reversible::Hashid.decode('1zWr1m0') #=> 10
 ```
 
 ## NanoID
@@ -80,7 +84,7 @@ Lite::Uxid::Hashid.decode('1zWr1m0') #=> 10
 [More information](https://github.com/ai/nanoid)
 
 ```ruby
-Lite::Uxid::Nanoid.encode #=> 'sMuNUa3Cegn6r5GRQ4Ij2'
+Lite::Uxid::Irreversible::Nanoid.encode #=> 'sMuNUa3Cegn6r5GRQ4Ij2'
 ```
 
 ## ULID
@@ -88,7 +92,7 @@ Lite::Uxid::Nanoid.encode #=> 'sMuNUa3Cegn6r5GRQ4Ij2'
 [More information](https://github.com/ulid/spec)
 
 ```ruby
-Lite::Uxid::Ulid.encode #=> '01GJAY9KGR539EZF4QWYEJGSN7'
+Lite::Uxid::Irreversible::Ulid.encode #=> '01GJAY9KGR539EZF4QWYEJGSN7'
 ```
 
 ## UUID
@@ -96,7 +100,7 @@ Lite::Uxid::Ulid.encode #=> '01GJAY9KGR539EZF4QWYEJGSN7'
 Implements `v4` and `v7` of the specification. [More information](https://en.wikipedia.org/wiki/Universally_unique_identifier)
 
 ```ruby
-Lite::Uxid::Uuid.encode #=> '4376a67e-1189-44b3-a599-7f7566bf105b'
+Lite::Uxid::Irreversible::Uuid.encode #=> '4376a67e-1189-44b3-a599-7f7566bf105b'
 ```
 
 ## Options
@@ -104,7 +108,7 @@ Lite::Uxid::Uuid.encode #=> '4376a67e-1189-44b3-a599-7f7566bf105b'
 Local options can be passed to override global options.
 
 ```ruby
-Lite::Uxid::Ulid.encode(charset: 'abc123', size: 12) #=> 'a3b12c12c3ca'
+Lite::Uxid::Irreversible::Ulid.encode(charset: 'abc123', size: 12) #=> 'a3b12c12c3ca'
 ```
 
 Passable options are:
