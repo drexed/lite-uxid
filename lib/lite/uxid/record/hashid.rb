@@ -43,7 +43,8 @@ module Lite
         end
 
         def uxid_prefix
-          nil
+          # Define in your class to enable prefixing uxid.
+          # eg: "sub_" or "user_"
         end
 
         private
