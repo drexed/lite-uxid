@@ -15,7 +15,7 @@ RSpec.describe Lite::Uxid::Irreversible::Nanoid do
     context "with prefix" do
       let(:prefix) { "test_" }
 
-      it 'to be a prefixed string' do
+      it "to be a prefixed string" do
         expect(described_class.encode(prefix: prefix).starts_with?(prefix)).to be(true)
         expect(encoder.encode.starts_with?(prefix)).to be(true)
       end

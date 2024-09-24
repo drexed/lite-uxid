@@ -24,7 +24,7 @@ RSpec.describe Lite::Uxid::Record::Obfuscateid do
 
   describe ".id_to_uxid" do
     it "to be 4517239960" do
-      expect(user.id_to_uxid).to eq(4517239960)
+      expect(user.id_to_uxid).to eq(4_517_239_960)
     end
   end
 

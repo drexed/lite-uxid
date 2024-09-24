@@ -16,8 +16,8 @@ RSpec.describe Lite::Uxid::Irreversible::Ulid do
       let(:prefix) { "test_" }
 
       it "to be prefixed" do
-        expect(described_class.encode(prefix: prefix).starts_with?(prefix)).to eq(true)
-        expect(encoder.encode.starts_with?(prefix)).to eq(true)
+        expect(described_class.encode(prefix: prefix).starts_with?(prefix)).to be(true)
+        expect(encoder.encode.starts_with?(prefix)).to be(true)
       end
     end
   end
