@@ -9,7 +9,7 @@ module Lite
 
     class Configuration
 
-      attr_accessor :hashid_charset, :hashid_size, :hashid_salt,
+      attr_accessor :hashid_charset, :hashid_salt,
                     :nanoid_charset, :nanoid_size,
                     :obfuscateid_spin,
                     :ulid_charset, :ulid_size,
@@ -18,7 +18,6 @@ module Lite
       def initialize
         @hashid_charset = ALPHANUMERIC
         @hashid_salt = 1_369_136
-        @hashid_size = 16
         @nanoid_charset = WEB_SAFE
         @nanoid_size = 21
         @obfuscateid_spin = 0

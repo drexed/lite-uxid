@@ -30,7 +30,7 @@ module Lite
       end
 
       def coder_length
-        @coder_length ||= coder_charset.size
+        @coder_length ||= coder_charset.length
       end
 
       def coder_prefix

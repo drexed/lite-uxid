@@ -23,8 +23,8 @@ RSpec.describe Lite::Uxid::Record::Hashid do
   end
 
   describe ".id_to_uxid" do
-    it "to be not nil" do
-      expect(user.id_to_uxid).not_to be_nil
+    it 'to be "7pair3f1XOaQ"' do
+      expect(user.id_to_uxid).to eq("7pair3f1XOaQ")
     end
   end
 
@@ -35,8 +35,8 @@ RSpec.describe Lite::Uxid::Record::Hashid do
   end
 
   describe ".callback_generate_uxid!" do
-    it "to be 7" do
-      expect(user.uxid.size).to eq(7)
+    it "to be 12" do
+      expect(user.uxid.length).to eq(12)
     end
 
     it 'to be "fake-id"' do

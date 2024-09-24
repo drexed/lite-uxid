@@ -5,14 +5,16 @@ module Lite
     module Reversible
       class Hashid < Base
 
+        MASK = 48
+
         def encode
-          encoded_id = encode_chars((id + coder_salt) << coder_size)
+          encoded_id = encode_chars((id + coder_salt) << MASK)
           "#{coder_prefix}#{encoded_id}"
         end
 
         def decode
           encoded_id = id.delete_prefix(coder_prefix.to_s)
-          (decode_chars(encoded_id) >> coder_size) - coder_salt
+          (decode_chars(encoded_id) >> MASK) - coder_salt
         end
 
         private
@@ -34,7 +36,7 @@ module Lite
         def decode_chars(encoded_id)
           pos = 0
           num = 0
-          len = encoded_id.size
+          len = encoded_id.length
           max = len - 1
 
           while pos < len
