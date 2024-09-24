@@ -23,8 +23,8 @@ RSpec.describe Lite::Uxid::Reversible::Obfuscateid do
     end
 
     it "to be 10" do
-      expect(described_class.encode(id).to_s.size).to eq(10)
-      expect(encoder.encode.to_s.size).to eq(10)
+      expect(described_class.encode(id).to_s.length).to eq(10)
+      expect(encoder.encode.to_s.length).to eq(10)
     end
   end
 

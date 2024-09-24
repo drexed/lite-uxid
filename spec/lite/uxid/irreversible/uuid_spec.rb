@@ -7,8 +7,8 @@ RSpec.describe Lite::Uxid::Irreversible::Uuid do
 
   describe ".encode" do
     it "to be 36" do
-      expect(described_class.encode.size).to eq(36)
-      expect(encoder.encode.size).to eq(36)
+      expect(described_class.encode.length).to eq(36)
+      expect(encoder.encode.length).to eq(36)
     end
   end
 

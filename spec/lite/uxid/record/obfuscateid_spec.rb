@@ -23,8 +23,8 @@ RSpec.describe Lite::Uxid::Record::Obfuscateid do
   end
 
   describe ".id_to_uxid" do
-    it "to be not nil" do
-      expect(user.id_to_uxid).not_to be_nil
+    it "to be 4517239960" do
+      expect(user.id_to_uxid).to eq(4517239960)
     end
   end
 
@@ -36,7 +36,7 @@ RSpec.describe Lite::Uxid::Record::Obfuscateid do
 
   describe ".callback_generate_uxid!" do
     it "to be 10" do
-      expect(user.uxid.size).to eq(10)
+      expect(user.uxid.length).to eq(10)
     end
 
     it 'to be "fake-id"' do

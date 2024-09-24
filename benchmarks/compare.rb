@@ -6,12 +6,12 @@ require "benchmark/ips"
 require "lite/uxid"
 
 Benchmark.ips do |x|
-  x.report("Hashid") do
+  x.report("HashID") do
     id = rand(1..1_000_000)
     Lite::Uxid::Reversible::Hashid.encode(id)
   end
 
-  x.report("Obfuscateid") do
+  x.report("ObfuscateID") do
     id = rand(1..1_000_000)
     Lite::Uxid::Reversible::Obfuscateid.encode(id)
   end
@@ -29,9 +29,14 @@ Benchmark.ips do |x|
     Lite::Uxid::Irreversible::Ulid.encode
   end
 
-  x.report("UUID") do
+  x.report("UUID v4") do
     _id = rand(1..1_000_000)
     Lite::Uxid::Irreversible::Uuid.encode
+  end
+
+  x.report("UUID v7") do
+    _id = rand(1..1_000_000)
+    Lite::Uxid::Irreversible::Uuid.encode(version: 7)
   end
 
   x.compare!

@@ -7,8 +7,8 @@ RSpec.describe Lite::Uxid::Irreversible::Ulid do
 
   describe ".encode" do
     it "to be 26" do
-      expect(described_class.encode.size).to eq(26)
-      expect(encoder.encode.size).to eq(26)
+      expect(described_class.encode.length).to eq(26)
+      expect(encoder.encode.length).to eq(26)
     end
   end
 

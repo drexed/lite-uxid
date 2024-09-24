@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Improve configuration template
 - Improve hashid generation
+- Improve specs
+- Improve docs
 ### Removed
 - Hashid size option
 
