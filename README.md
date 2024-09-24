@@ -27,12 +27,14 @@ Or install it yourself as:
 
 * [Configuration](#configuration)
 * [Usage](#usage)
-* [HashID](#hashid)
-* [NanoID](#nanoid)
-* [ObfuscateID](#obfuscateid)
-* [ULID](#ulid)
-* [UUID](#uuid)
 * [Options](#options)
+* [Reversible](#reversible)
+    * [HashID](#hashid)
+    * [ObfuscateID](#obfuscateid)
+* [Irreversible](#Irreversible)
+    * [NanoID](#nanoid)
+    * [ULID](#ulid)
+    * [UUID](#uuid)
 * [ActiveRecord](#active_record)
 * [Benchmarks](#benchmarks)
 
@@ -42,75 +44,39 @@ Or install it yourself as:
 `config/initalizers/lite_uxid.rb`
 
 ```ruby
-Lite::Uxid::ALPHANUMERIC = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-Lite::Uxid::COCKFORDS_32 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-Lite::Uxid::WEB_SAFE     = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_"
-
 Lite::Uxid.configure do |config|
-  config.hashid_charset = ALPHANUMERIC
+  # HashID
+  config.hashid_charset = Lite::Uxid::ALPHANUMERIC
   config.hashid_salt = 1_369_136
-  config.hashid_size = 16
-  config.nanoid_charset = WEB_SAFE
+
+  # NanoID
+  config.nanoid_charset = Lite::Uxid::WEB_SAFE
   config.nanoid_size = 21
-  config.ulid_charset = COCKFORDS_32
+
+  # ObfuscatedID
+  config.obfuscateid_spin = 0
+
+  # ULID
+  config.ulid_charset = Lite::Uxid::COCKFORDS_32
   config.ulid_size = 26
+
+  # UUID
   config.uuid_version = 4
 end
 ```
 
 ## Usage
 
-#### Instance
+### Instance call
+
 ```ruby
 coder = Lite::Uxid::Reversible::Hashid.new(10, size: 12)
 coder.encode #=> '67wGI0'
 ```
 
-#### Class
+### Class call
 ```ruby
 Lite::Uxid::Reversible::Hashid.decode('67wGI0', size: 12) #=> 10
-```
-
-## HashID
-
-[More information](https://hashids.org)
-
-```ruby
-Lite::Uxid::Reversible::Hashid.encode(10)        #=> '1zWr1m0'
-Lite::Uxid::Reversible::Hashid.decode('1zWr1m0') #=> 10
-```
-
-## NanoID
-
-[More information](https://github.com/ai/nanoid)
-
-```ruby
-Lite::Uxid::Irreversible::Nanoid.encode #=> 'sMuNUa3Cegn6r5GRQ4Ij2'
-```
-
-## ObfuscateID
-
-[More information](https://github.com/namick/scatter_swap)
-
-```ruby
-Lite::Uxid::Reversible::Obfuscateid.encode(10)         #=> '2056964183'
-Lite::Uxid::Reversible::Obfuscateid.decode(2056964183) #=> 10
-```
-
-## ULID
-
-[More information](https://github.com/ulid/spec)
-
-```ruby
-Lite::Uxid::Irreversible::Ulid.encode #=> '01GJAY9KGR539EZF4QWYEJGSN7'
-```
-
-## UUID
-
-Implements `v4` and `v7` of the specification. [More information](https://en.wikipedia.org/wiki/Universally_unique_identifier)
-
-```ruby
-Lite::Uxid::Irreversible::Uuid.encode #=> '4376a67e-1189-44b3-a599-7f7566bf105b'
 ```
 
 ## Options
@@ -127,16 +93,63 @@ Passable options are:
 {
   charset: 'string',  # Available for: hashid, nanoid, ulid
   salt:    'string',  # Available for: hashid
-  size:    'integer', # Available for: hashid, nanoid, ulid
+  size:    'integer', # Available for: nanoid, ulid
   spin:    'integer', # Available for: obfuscateid
   version: 'integer', # Available for: uuid
-  prefix:  'string'   # Available for: hashid, nanoid
+  prefix:  'string'   # Available for: hashid, nanoid, ulid, uuid
 }
+```
+
+## Reversible
+
+### HashID
+
+- [More information](https://hashids.org)
+
+```ruby
+Lite::Uxid::Reversible::Hashid.encode(10)             #=> '7pau2oXSklq0'
+Lite::Uxid::Reversible::Hashid.decode('7pau2oXSklq0') #=> 10
+```
+
+### NanoID
+
+- [More information](https://github.com/ai/nanoid)
+
+```ruby
+Lite::Uxid::Irreversible::Nanoid.encode #=> 'sMuNUa3Cegn6r5GRQ4Ij2'
+```
+
+## Irreversible
+
+### ObfuscateID
+
+- [More information](https://github.com/namick/scatter_swap)
+
+```ruby
+Lite::Uxid::Reversible::Obfuscateid.encode(10)         #=> 2056964183
+Lite::Uxid::Reversible::Obfuscateid.decode(2056964183) #=> 10
+```
+
+### ULID
+
+- [More information](https://github.com/ulid/spec)
+
+```ruby
+Lite::Uxid::Irreversible::Ulid.encode #=> '01GJAY9KGR539EZF4QWYEJGSN7'
+```
+
+### UUID
+
+Implements `v4` and `v7` of the specification.
+- [More information](https://en.wikipedia.org/wiki/Universally_unique_identifier)
+
+```ruby
+Lite::Uxid::Irreversible::Uuid.encode #=> '4376a67e-1189-44b3-a599-7f7566bf105b'
 ```
 
 ## ActiveRecord
 
-**Table**
+### Table
 
 Add the following attribute to all corresponding tables.
 
@@ -146,7 +159,7 @@ Add the following attribute to all corresponding tables.
 t.string :uxid, null: false, index: { unique: true }
 ```
 
-If using UUID and your database supports it:
+If using UUID or ULID and your database supports it:
 
 ```ruby
 t.uuid :uxid, null: false, index: { unique: true }
@@ -156,7 +169,7 @@ t.uuid :uxid, null: false, index: { unique: true }
 
 `uxid` attribute will be automatically generated and applied when the record is created.
 
-#### HashID
+### Mixin
 ```ruby
 class User < ActiveRecord::Base
   # Pick one:
@@ -168,7 +181,7 @@ class User < ActiveRecord::Base
 end
 ```
 
-Add a prefix to `hashid` and `nanoid` record types by adding a `uxid_prefix` method.
+HashID, NanoID, ULID, and UUID modules allow prefixing via the `uxid_prefix` method.
 
 ```ruby
 class User < ActiveRecord::Base
@@ -180,26 +193,38 @@ class User < ActiveRecord::Base
 end
 ```
 
-**Usage**
-
 Using the `hashid` and `nanoid` above provide handy methods to find records by uxid.
 
-#### Hashing methods
 ```ruby
 user = User.new
 user.id_to_uxid #=> Encodes the records id to uxid
 user.uxid_to_id #=> Decodes the records uxid to id
-```
 
-#### Finder methods
-```ruby
 User.find_by_uxid('x123')  #=> Find record by uxid
 User.find_by_uxid!('x123') #=> Raises an ActiveRecord::RecordNotFound error if not found
 ```
 
 ## Benchmarks
 
-The classes ranked from fastest to slowest are `UUID`, `HashID`, `NanoID`, `ULID`, and `ObfuscateID`.
+The classes ranked from fastest to slowest are `UUID`, `HashID`, `NanoID`, `ULID`, and `ObfuscateID`. Here are the latest results:
+
+```
+Calculating -------------------------------------
+              Hashid    135.993k (± 2.9%) i/s    (7.35 μs/i) -    681.588k in   5.016413s
+         Obfuscateid     30.702k (± 2.2%) i/s   (32.57 μs/i) -    155.907k in   5.080592s
+              NanoID     99.327k (± 1.5%) i/s   (10.07 μs/i) -    504.135k in   5.076630s
+                ULID     82.211k (± 2.3%) i/s   (12.16 μs/i) -    418.455k in   5.092823s
+             UUID v4    237.629k (± 6.8%) i/s    (4.21 μs/i) -      1.190M in   5.040477s
+             UUID v7    234.956k (±13.8%) i/s    (4.26 μs/i) -      1.153M in   5.051057s
+
+Comparison:
+             UUID v4:   237629.0 i/s
+             UUID v7:   234955.9 i/s - same-ish: difference falls within error
+              Hashid:   135993.5 i/s - 1.75x  slower
+              NanoID:    99327.3 i/s - 2.39x  slower
+                ULID:    82210.7 i/s - 2.89x  slower
+         Obfuscateid:    30702.0 i/s - 7.74x  slower
+```
 
 View how each compares by running the [benchmarks](https://github.com/drexed/lite-uxid/tree/master/benchmarks).
 

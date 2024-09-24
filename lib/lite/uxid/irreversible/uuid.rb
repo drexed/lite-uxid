@@ -6,12 +6,15 @@ module Lite
       class Uuid < Base
 
         def encode
-          case coder_version
-          when 7
-            SecureRandom.uuid_v7
-          else
-            SecureRandom.uuid
-          end
+          encoded_id =
+            case coder_version
+            when 7
+              SecureRandom.uuid_v7
+            else
+              SecureRandom.uuid
+            end
+
+          "#{coder_prefix}#{encoded_id}"
         end
 
       end

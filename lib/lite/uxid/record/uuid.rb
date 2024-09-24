@@ -12,10 +12,15 @@ module Lite
           end
         end
 
+        def uxid_prefix
+          # Define in your class to enable prefixing uxid.
+          # eg: "sub_" or "user_"
+        end
+
         private
 
         def callback_generate_uxid!
-          self.uxid = Lite::Uxid::Irreversible::Uuid.encode
+          self.uxid = Lite::Uxid::Irreversible::Uuid.encode(prefix: uxid_prefix)
         end
 
       end

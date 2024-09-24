@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [2.0.2] - 2024-09-23
+### Added
+- Prefixes to uuid and ulid
 ### Changed
 - Improve configuration template
 - Improve hashid generation

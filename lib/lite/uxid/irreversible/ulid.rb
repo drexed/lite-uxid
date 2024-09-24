@@ -18,7 +18,7 @@ module Lite
             pos -= 1
           end
 
-          encoded_id
+          "#{coder_prefix}#{encoded_id}"
         end
 
         private
