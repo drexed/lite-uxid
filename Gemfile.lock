@@ -170,7 +170,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
-  activesupport
   bundler
   database_cleaner
   fasterer
